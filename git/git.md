@@ -102,3 +102,6 @@ git push [别名] [分支]<br>
 
 3.git push [别名] [分支]<br>
 
+##### 克隆
+
+git clone [地址]
