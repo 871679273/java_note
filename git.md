@@ -56,35 +56,37 @@ git status
 
 ##### 后退或前进历史版本：
 
-1.git reset --hard 七位索引号（relog里面的）
-2.--hard: 本地库指针移动时，同时重置暂存区和工作区
-3.--mixed: 本地库指针移动时，同时重置暂存区，工作区不动
-4.--sorf: 本地库指针移动时，其他不动
+1.git reset --hard 七位索引号（relog里面的）<br>
+2.--hard: 本地库指针移动时，同时重置暂存区和工作区<br>
+3.--mixed: 本地库指针移动时，同时重置暂存区，工作区不动<br>
+4.--sorf: 本地库指针移动时，其他不动<br>
 
 ##### 删除文件：
 
-1.rm file 删除工作区中的
-2.git add file、git commit -m "将删除操作同步至暂存区和本地库" file
-3.gir reflog
-4.git reset --hard (撤销本地库的删除/回到历史版本)
-（5.只add未commit，从暂存区中撤销删除：可以直接git reset --HEAD 索引或head）
+1.rm file 删除工作区中的<br>
+2.git add file、git commit -m "将删除操作同步至暂存区和本地库" file<br>
+3.gir reflog<br>
+4.git reset --hard (撤销本地库的删除/回到历史版本)<br>
+（5.只add未commit，从暂存区中撤销删除：可以直接git reset --HEAD 索引或head）<br>
 
 ##### 比较：
 
-比对工作区和暂存区的不同：git diff / git diff file
-比较暂存区和本地库的不同：git diff [历史版本(HEAD)] [file]
-分支：
-1.git branch -v 查看分支
-2.git branch [branch01] 创建分支
-3.git checkout branch01/master 切换分支
-4.git merge branch01-->选择内容-->git add [file]-->git commit (不带文件名) 合并分支
+比对工作区和暂存区的不同：git diff / git diff file<br>
+比较暂存区和本地库的不同：git diff [历史版本(HEAD)] [file]<br>
+
+##### 分支：
+
+1.git branch -v 查看分支<br>
+2.git branch [branch01] 创建分支<br>
+3.git checkout branch01/master 切换分支<br>
+4.git merge branch01-->选择内容-->git add [file]-->git commit (不带文件名) 合并分支<br>
 
 ##### 将github地址保存到本地
 
-1.git remote -v 查看
-2.git remote add [别名]  [github地址]
+1.git remote -v 查看<br>
+2.git remote add [别名]  [github地址]<br>
 
 ##### 推送: 
 
-git push [别名] [分支]
+git push [别名] [分支]<br>
 
