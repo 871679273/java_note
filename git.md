@@ -26,8 +26,12 @@ cat [file]
 
 ### #二
 
-设置用户名和邮箱：git config --global user.name "myname" 、git config --global user.email "xxx@xxx"<br>
-本地仓库初始化：<br>
+##### 设置用户名和邮箱：
+
+git config --global user.name "myname" 、git config --global user.email "xxx@xxx"<br>
+
+##### 本地仓库初始化：<br>
+
 1.定位：cd d:/ 、 cd GitResp/ 、或直接在文件夹下右键Git bash here<br>
 2.初始化：git init<br>
 
@@ -89,4 +93,12 @@ git status
 ##### 推送: 
 
 git push [别名] [分支]<br>
+
+##### 整个文件夹推送
+
+1.git add .<br>
+
+2.git commit -m "xx"<br>
+
+3.git push [别名] [分支]<br>
 
