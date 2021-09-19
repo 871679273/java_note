@@ -26,10 +26,10 @@ cat [file]
 
 ### #二
 
-设置用户名和邮箱：git config --global user.name "myname" 、git config --global user.email "xxx@xxx"
-本地仓库初始化：
-1.定位：cd d:/ 、 cd GitResp/ 、或直接在文件夹下右键Git bash here
-2.初始化：git init
+设置用户名和邮箱：git config --global user.name "myname" 、git config --global user.email "xxx@xxx"<br>
+本地仓库初始化：<br>
+1.定位：cd d:/ 、 cd GitResp/ 、或直接在文件夹下右键Git bash here<br>
+2.初始化：git init<br>
 
 
 
@@ -49,10 +49,10 @@ git status
 
 ##### 日志查看：
 
-1.git log、下一页-空格、上一页b、退出q、
-2.git log --pretty=online(简洁展示-方式1)、
-3.git log --online(简洁2)
-4.git reflog(简洁3)
+1.git log、下一页-空格、上一页b、退出q、<br>
+2.git log --pretty=online(简洁展示-方式1)、<br>
+3.git log --online(简洁2)<br>
+4.git reflog(简洁3)<br>
 
 ##### 后退或前进历史版本：
 
