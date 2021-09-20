@@ -24,11 +24,11 @@
 
 public class HelloWorld{<br>
 
-​			public static void main(String [] args){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public static void main(String [] args){<br>
 
-​							System.out.println("hello菜鸟");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("hello菜鸟");<br>
 
-​			}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
 
 }
 
