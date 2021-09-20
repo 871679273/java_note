@@ -30,7 +30,7 @@ cat [file]
 
 git config --global user.name "myname" 、git config --global user.email "xxx@xxx"<br>
 
-##### 本地仓库初始化：<br>
+##### 本地仓库初始化：
 
 1.定位：cd d:/ 、 cd GitResp/ 、或直接在文件夹下右键Git bash here<br>
 2.初始化：git init<br>
@@ -105,3 +105,46 @@ git push [别名] [分支]<br>
 ##### 克隆
 
 git clone [地址]
+
+##### 抓取
+
+git fetch [别名] [分支]<br>
+
+只将远程库内容下载到本地，本地区内容不变，抓取后切换到远程库看看内容是否正确，之后再切换回本地进行合并
+
+##### 合并
+
+1.git merge [分支]]<br>
+
+2.在解决merging冲突问题时的提交不带文件名
+
+##### 拉取
+
+git pull [别名] [分支]   直接抓取+合并到本地
+
+##### 跨团队合作
+
+1.本团队获取远程库地址]<br>
+
+2.另团队fork操作： 进入resp，点击fork，复制地址，找个本地位置，git clone [地址]<br>
+
+3.另团队工作，修改内容后，push到自己的remote<br>
+
+4.另团队：网页找到pull requests --> new pull request-->create pull request <br>
+
+5.本团队：进入网页-->pull requests-->files change查看
+
+##### SSH免密操作
+
+不用每次身份认证，但只能针对一个账号，工作常用
+
+1.进入用户主目录：cd ~<br>
+
+2.生成一个.ssh的目录： ssh-keygen -t rsa -C [github邮箱]  然后按三次回车<br>
+
+3.打开.ssh目录下id_rad.pub文件，将里面内容进行复制操作<br>
+
+4.github里点头像，setting，SSHandGPG keys, SSH keys,add ssh key<br>
+
+5.生成后就可以正常进行push。对ssh地址起别名。git remote add  [别名] [ssh地址]
+
