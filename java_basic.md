@@ -1,4 +1,4 @@
-### 简单的DOS命令
+##### 简单的DOS命令
 
 1.调出命令行：win+R,输入cmd<br>
 
@@ -20,7 +20,11 @@
 
 10.上下箭头键 展示之前或之后的命令<br>
 
-### HelloWorld
+<br>
+
+##### HelloWorld
+
+1.写java文件<br>
 
 public class HelloWorld{<br>
 
@@ -31,4 +35,99 @@ public class HelloWorld{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 
 }
+
+2.编译<br>
+
+命令行中，进入所在目录：javac HelloWorld.java<br>
+
+3.执行（解释）<br>
+
+java HelloWorld.java<br>
+
+<br>
+
+##### 注释
+
+1.单行注释：//<br>
+
+2.多行注释：/* */<br>
+
+3.文档注释：<br>
+
+/**<br>
+
+*第一行内容<br>
+
+*第二行内容<br>
+
+*/<br>
+
+<br>
+
+##### 反编译工具
+
+class to java<br>
+
+1.ide插件<br>
+
+2.jd-gui.exe<br>
+
+<br>
+
+##### 标识符（命名规则）
+
+###### 硬性规定：<br>
+
+1.开头必须是字母，或下划线，或$（不能是数字）<br>
+
+2.其他部分必须是字母，数字，下划线，美元符号，不能有其他符号<br>
+
+3.大小写敏感，长度无限制<br>
+
+4.不能是java关键字<br>
+
+###### 规范建议：<br>
+
+1.驼峰标识<br>
+
+- 类名、接口：首字符大写
+- 方法、变量：首字符小写
+
+2.见名知意<br>
+
+##### 字符集
+
+##### JAVA基本数据类型
+
+java是一种强类型语言：变量在定义时必须声明其类型
+
+- 基本数据类型：
+
+  四类八种
+
+  1.数据型：整数类型（byte,short,int,long）、浮点类型（float,double）【范围不同】<br>
+
+  2.字符型（char）<br>
+
+  3.布尔型（boolean）：true,false <br>
+
+- 引用数据类型：类（class）、接口（interface）、数组
+
+- 详细：
+
+  1.默认是int，使用long时要在数字后面加L：long a = 1111111111111111111L;<br>
+
+  2.浮点类型会损失一定精度，float是七位，double是两倍精度<br>
+
+  3.默认是double,一般都用double.要变为float的话数字后要加f<br>
+
+  4.char用单引号，表示一个字符，String用双引号，表示一个字符序列<br>
+
+  
+
+  
+
+
+
+
 
