@@ -196,15 +196,60 @@ java是一种强类型语言：变量在定义时必须声明其类型
 ##### 1.分支结构：
 
 1. 单分支结构：if (判断) {执行}、
+
 2. 双分支结构：if (判断)｛｝else｛｝
+
+3. 多分支结构：if (判断) {} else if (){} else if (){} else (){}
+
+4. 嵌套分支结构：｛if｝
+
+5. switch多分支选择结构：
+
+   switch(表达式)｛<br>
+
+   &#9;case 值1:<br>
+
+   &#9;&#9;语句;<br>
+
+   &#9;&#9;[break;]<br>
+
+   &#9;case 值2:<br>
+
+   &#9;&#9;语句;<br>
+
+   &#9;&#9;[break;]<br>
+
+   &#9;case 值3:<br>
+
+   &#9;&#9;语句;<br>
+
+   &#9;&#9;[break;]<br>
+
+   &#9;......<br>
+
+   &#9;[default:]<br>
+
+   &#9;&#9;default语句；<br>
+
+   ｝<br>
 
 <br>
 
 #### Class Scanner
 
-创建文件扫描器对象(System.in表示的是标准输入[装饰者模式])<br>
+创建文件扫描器对象，System.in表示的是标准输入，可以从控制台读取数据[装饰者模式]<br>
 
-Scanner sc = new Scanner(System.in);
+先import java.util.Scanner;<br>
+
+Scanner sc = new Scanner(System.in);<br>
+
+System.out.println("请输入数据");<br>
+
+String str = sc.nextLine();<br>
+
+System.out.println(str);<br>
+
+
 
 <br>
 
