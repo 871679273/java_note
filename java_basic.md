@@ -203,35 +203,29 @@ java是一种强类型语言：变量在定义时必须声明其类型
 
 4. 嵌套分支结构：｛if｝
 
-5. switch多分支选择结构：
+5. switch和多分支if的选择：
 
-   switch(表达式)｛<br>
+   switch：只能处理等值条件判断；且条件有数字类型限制；<br>
 
-   &#9;case 值1:<br>
+   多重if：特别适合某个变量处于某个连续区间的情况。<br>
 
-   &#9;&#9;语句;<br>
+   https://www.pianshen.com/article/6493549521/<br>
 
-   &#9;&#9;[break;]<br>
+   https://blog.csdn.net/qq_29933359/article/details/80777092<br>
 
-   &#9;case 值2:<br>
+6. switch多分支选择结构：
 
-   &#9;&#9;语句;<br>
+   ![image-20210921232144858](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210921232144858.png)
 
-   &#9;&#9;[break;]<br>
+   -只能处理等值条件判断<br>
 
-   &#9;case 值3:<br>
+   -表达式必须为byte,short,int或char，不能是flaot,double,java1.7后支持string<br>
 
-   &#9;&#9;语句;<br>
+   -简写方式：<br>
 
-   &#9;&#9;[break;]<br>
+   ![image-20210921232500484](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210921232500484.png)
 
-   &#9;......<br>
 
-   &#9;[default:]<br>
-
-   &#9;&#9;default语句；<br>
-
-   ｝<br>
 
 <br>
 
