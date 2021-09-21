@@ -225,7 +225,7 @@ java是一种强类型语言：变量在定义时必须声明其类型
 
    ![image-20210921232500484](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210921232500484.png)
 
-
+查看图片：https://blog.csdn.net/Hank0321/article/details/120407499<br>
 
 <br>
 
@@ -250,4 +250,10 @@ System.out.println(str);<br>
 #### 设计模式
 
 马士兵：抽丝剥茧设计模式+坦克大战项目<br>
+
+#### 字符串比较
+
+String str = "1234";<br>
+
+if (**str.equals("4321")**){}<br>
 
