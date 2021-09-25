@@ -231,7 +231,8 @@ java是一种强类型语言：变量在定义时必须声明其类型
 
 #### Class Scanner
 
-创建文件扫描器对象，System.in表示的是标准输入，可以从控制台读取数据[装饰者模式]<br>
+- 创建文件扫描器对象，System.in表示的是标准输入，可以从控制台读取数据[装饰者模式]<br>
+
 
 先import java.util.Scanner;<br>
 
@@ -243,7 +244,8 @@ String str = sc.nextLine();<br>
 
 System.out.println(str);<br>
 
-
+- .nextInt() 接收整数
+- .nextFloat() .nextDouble() 接收小数
 
 <br>
 
