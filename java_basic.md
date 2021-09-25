@@ -232,7 +232,19 @@ java是一种强类型语言：变量在定义时必须声明其类型
 #### 循环结构
 
 1. while
+
+   ```java
+   int i = 1;
+   while(i<=100){
+       System.out.println("第"+i+"遍输出");
+       i++;
+   }
+   ```
+
+   
+
 2. do while
+
 3. for while
 
 #### Class Scanner
