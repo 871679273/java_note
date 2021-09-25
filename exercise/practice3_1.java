@@ -189,3 +189,63 @@ public class practice3_1{
 }
 */
 
+
+/* 9
+import java.util.Scanner;
+
+public class practice3_1{
+	
+	public static void main (String[] args){
+		Scanner sc = new Scanner(System.in);
+		System.out.println("欢迎使用计算器");
+		System.out.println("请输入符号");
+		String method = sc.nextLine();
+		System.out.println("请输入第一个数");
+		int num1 = sc.nextInt();
+		System.out.println("请输入第二个数");
+		int num2 = sc.nextInt();		
+		int result = 0;
+		switch (method){
+			case "+":
+			result = num1 + num2;
+			System.out.println("计算结果："+result);
+			break;
+			case "-":
+			result = num1 - num2;
+			System.out.println("计算结果："+result);
+			break;
+			case "*":
+			result = num1 * num2;
+			System.out.println("计算结果："+result);
+			break;
+			case "/":
+			result = num1 / num2;
+			System.out.println("计算结果："+result);
+			break;
+			default:
+			System.out.println("符号输入错误");
+		}
+		
+	}
+}
+*/
+
+import java.util.Scanner;
+
+public class practice3_1{
+	
+	public static void main (String[] args){
+		Scanner sc = new Scanner(System.in);
+		System.out.println("请输入月份");
+		int month = sc.nextInt();
+		System.out.println("请输入舱位");
+		int c = sc.nextInt();
+		if (month>10 || month <4){
+			int money = (int)((c==1)?0.5*5000:0.4*5000);
+			System.out.println("价格是"+money);
+		}else{
+			int money = (int)((c==1)?0.9*5000:0.8*5000);
+			System.out.println("价格是"+money);
+		}
+	}
+}
