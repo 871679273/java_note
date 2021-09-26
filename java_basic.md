@@ -329,6 +329,12 @@ public static int factorial(int n){
 
 <br>
 
+### 数组
+
+
+
+<br>
+
 ### Class Scanner
 
 - 创建文件扫描器对象，System.in表示的是标准输入，可以从控制台读取数据[装饰者模式]<br>
