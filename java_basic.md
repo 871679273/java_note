@@ -1,3 +1,5 @@
+
+
 ### 简单的DOS命令
 
 1.调出命令行：win+R,输入cmd<br>
@@ -355,6 +357,8 @@ public static int factorial(int n){
 
 ### 数组
 
+#### 数组
+
 - 数组是相同类型数据的有序集合
   - 按一定先后次序排列组合而成
   - 其中的每一个数据称作一个数组元素，每个数组元素可以通过一个下标来访问他们。
@@ -377,6 +381,8 @@ public static int factorial(int n){
   - 2.分配空间： a = new int[5];
   - 3.赋值： a[0] = 8;
   - 4.处理数据： a[0] = a[0] * 10;
+  - 引用：arrayName[index]
+  - 长度：.length
 
   ```java
   public class ArrayDemo{
@@ -417,7 +423,7 @@ public static int factorial(int n){
   		*/
   		
   		/*
-  		数组是引用类型，当创建完成数组之后相当于是在方法外定义了一个变量，此时数组中的值是有默认值的
+  		数组是引用类型，当创建完成数组之后相当于是在方法外定义了一个变量，此时数组中的值是有默认值的（数组是引用类型，它的元素相当于类的实例变量，因此数组一经分配空间，其中的每个元素也被按照实例变量同样的方式被隐式初始化。）
   			默认是什么，取决于你定义的数组的类型：
   			int:0
   			String null
@@ -454,7 +460,7 @@ public static int factorial(int n){
     - 选择排序
     - 插入排序
     - 快速排序
-    - 其他排序算法请看：Sorting_Algorithm.md
+    - 其他排序算法请看：Sorting_Algorithm.md 或 visualgo.net/zh (数据结构和算法动态可视化)
 
   - 2、排序算法的时间复杂度（空间复杂度）
 
@@ -463,11 +469,119 @@ public static int factorial(int n){
   - 3、排序算法的稳定性
     	  排序之后的值跟排序之前的值位置是否发生变化
 
-<br>
+#### 二维数组
+
+- java中多维数组可以是不规则的(数组的数组)
+
+```java
+/*
+二维数组可以称作数组的数组
+	定义二维数组的时候一定需要注意，必须要给定数组的长度
+*/
+
+public class TwoArray{	
+	public static void main(String[] args){
+        
+        int arr0[][] = {{1,2,3,4,5},{6,7,8},{9,10,11,12}};//直接创建
+		int arr1[][] = new int[3][5];//规则的数组arr1
+		int arr2[][] = new int[3][];//不规则的数组arr2
+		//创建二维数组的对象
+		arr2[0] = new int[5];
+		arr2[1] = new int[3];
+		arr2[2] = new int[4];
+		//赋值
+		arr2[0][0] = 1;
+		arr2[0][1] = 2;
+		arr2[0][2] = 3;
+		arr2[0][3] = 4;
+		arr2[0][4] = 5;
+		
+		arr2[1][0] = 6;
+		arr2[1][1] = 7;
+		arr2[1][2] = 8;
+		
+		arr2[2][0] = 9;
+		arr2[2][1] = 10;
+		arr2[2][2] = 11;
+		arr2[2][3] = 12;
+		//打印数组
+		for(int i = 0;i<arr2.length;i++){
+			for(int j = 0;j<arr2[i].length;j++){
+				System.out.print(arr2[i][j]+"\t");
+			}
+			System.out.println();
+		}		
+	}
+}
+```
+
+#### 数组的拷贝
+
+```java
+// 使用java.lang.System类的静态方法 
+public static void arraycopy (Object src,int srcPos,Object dest, int destPos,int length) 
+    
+// 可以用于数组src从第srcPos项元素开始的length个元素拷贝到目标数组从destPos项开始的length个位置。
+    
+// 如果源数据数目超过目标数组边界会抛出 
+//  IndexOutOfBoundsException 异常
+    
+public class ArrayTest7 { 
+    public static void main(String args[]) { 
+        //一维数组的拷贝
+        String[] s = {"Mircosoft","IBM","Sun","Oracle","Apple"};
+        String[] sBak = new String[6]; 
+        System.arraycopy(s,0,sBak,0,s.length); 
+        for(int i=0;i<sBak.length;i++){ 
+            System.out.print(sBak[i]+" "); 
+        }
+        System.out.println(); 
+        //二维数组的拷贝
+        int[][] intArray = {{1,2},{1,2,3},{3,4}}; 
+        int[][] intArrayBak = new int[3][]; 
+        System.arraycopy(intArray,0,intArrayBak,0,intArray.length); 
+        intArrayBak[2][1] = 100; 
+        for(int i = 0;i<intArray.length;i++){ 
+            for(int j =0;j<intArray[i].length;j++){ 
+                System.out.print(intArray[i][j]+" "); 
+            }
+            System.out.println(); 
+        } 
+    } 
+}
+```
+
+#### 命令行参数
+
+- 在启动Java应用程序时可以一次性地向应用程序中传递0~多个参数
+
+  - 命令行参数使用格式： 
+
+    java ClassName lisa "bily" "Mr Brown“    （由参数args接收 ）
+
+  - 空格将参数分开 
+
+  - 若参数包含空格，用双引号引起来
+
+  ```java
+  public class Test { 
+  	public static void main(String[] args) { 
+          for ( int i = 0; i < args.length; i++ ) { 
+              System.out.println("args[" + i + "] = " + args[i]); 
+          } 
+      } 
+  } 
+  //运行程序  java Test lisa "bily" "Mr Brown" 
+  //输出结果： args[0] = lisa; args[1] = bily; args[2] = Mr Brown;
+  ```
 
 <br>
 
-### Class Scanner
+<br>
+
+### Class
+
+#### Class Scanner
 
 - 创建文件扫描器对象，System.in表示的是标准输入，可以从控制台读取数据[装饰者模式]<br>
 
@@ -484,6 +598,14 @@ System.out.println(str);<br>
 
 - .nextInt() ;接收整数
 - .nextFloat() .nextDouble() 接收小数
+
+#### Class Arrays
+
+```java
+import java.util.Arrays;
+//排序.sort
+Arrays.sort(array);
+```
 
 <br>
 
