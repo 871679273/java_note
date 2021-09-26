@@ -294,6 +294,41 @@ java是一种强类型语言：变量在定义时必须声明其类型
 
 <br>
 
+#### 4.递归（recursion）
+
+- 程序调用自身的编程技巧：一个过程或函数在其定义或说明中有直接或间接调用自身的一种方法。
+- 注意：能不用就不用，递归会加大资源的消耗，如果递归层次比较深，会造成栈溢出。
+- 必须使用的场景：输出某个磁盘目录下的所有文件
+
+```java
+//Fibonacci
+public class Fibonacci{
+	public static void main(String[] args){
+		for(int i = 1;i<=10;i++){
+			System.out.print(getNumber(i)+"\t");
+		}
+	}
+	public static int getNumber(int number){
+		if(number==1||number==2){
+			return 1;
+		}else{
+			return getNumber(number-1)+getNumber(number-2);
+		}
+	}
+}
+
+//阶乘
+public static int factorial(int n){
+    if(n==1){
+        return 1;
+    }else{
+        return n*factorial(n-1);
+    }
+}
+```
+
+<br>
+
 ### Class Scanner
 
 - 创建文件扫描器对象，System.in表示的是标准输入，可以从控制台读取数据[装饰者模式]<br>
