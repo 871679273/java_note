@@ -367,6 +367,102 @@ public static int factorial(int n){
 - 数组属引用类型
   - length, elemenets of the array
 
+- 注意
+  - 声明一个变量是在内存空间划出一块合适的空间；声明一个数组是在内存空间划出一串连续的空间。
+  - 数组只有一个名称，即标识符。元素下标从0开始。数组长度固定不变，避免数组越界。
+
+- 使用数组
+
+  - 1.声明数组： int[] a;
+  - 2.分配空间： a = new int[5];
+  - 3.赋值： a[0] = 8;
+  - 4.处理数据： a[0] = a[0] * 10;
+
+  ```java
+  public class ArrayDemo{
+  	public static void main(String[] args){	
+  		//声明数组
+  		int[] array;
+  		//创建内存空间
+  		array = new int[5];
+  		//数组赋值
+  		array[0] = 0;
+  		array[1] = 1;
+  		array[2] = 2;
+  		array[3] = 3;
+  		array[4] = 4;
+  		//数组操作
+  		System.out.println(array[0]);
+  		
+  		//数组的几种创建方式
+  		//1、声明并申请空间
+  		int[] arr1 = new int[5];
+  		int [] arr2 = new int[5];
+  		int  arr3[] = new int[5];
+  		//2、声明数组并赋值
+  		int[] arr4 = new int[]{1,2,3,4,5};
+  		//3、直接初始化操作
+  		int[] arr5 = {1,2,3};
+  		
+  		//获取数组的长度
+  		System.out.println(arr1.length);
+  		
+  		//输入5个数值，求平均值
+  		int[] arr6 = new int[]{56,98,34,89,100};
+  		int sum = 0;
+  		for(int i = 0;i<arr6.length;i++){
+  			sum+=arr6[i];
+  		}
+  		System.out.println("平均值是："+sum/arr6.length);
+  		*/
+  		
+  		/*
+  		数组是引用类型，当创建完成数组之后相当于是在方法外定义了一个变量，此时数组中的值是有默认值的
+  			默认是什么，取决于你定义的数组的类型：
+  			int:0
+  			String null
+  			boolean false
+  		数组可以根据下标获取值，但是获取的时候下标的范围是[0,length-1]
+  		*/
+  		int[] array = new int[5];
+  		System.out.println(array[0]);
+  	}
+  }
+  ```
+
+- 数组与数据结构
+
+  数组相当于数据结构的一种实现，很多数据在进行存储的时候需要使用数组<br>
+
+  数据结构：
+
+  - 线性表
+  - 非线性表
+  - 树
+  - 图
+  - 队列
+  - 栈
+
+- 数组与排序算法
+
+  数组经常会用来考排序算法：<br>
+  面试需求：
+
+  - 1、写出某种排序算法
+
+    - 冒泡排序
+    - 选择排序
+    - 插入排序
+    - 快速排序
+    - 其他排序算法请看：Sorting_Algorithm.md
+
+  - 2、排序算法的时间复杂度（空间复杂度）
+
+    ​      衡量一个数据结构是否合适的衡量标准
+
+  - 3、排序算法的稳定性
+    	  排序之后的值跟排序之前的值位置是否发生变化
+
 <br>
 
 <br>
