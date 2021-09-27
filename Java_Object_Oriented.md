@@ -309,3 +309,194 @@ public class Teacher {
 <br>
 
 <br>
+
+### this 关键字
+
+- this的作用: 
+  - this表示的是当前对象本身
+  - 更准确地说，this代表当前对象的一个引用。
+- 普通方法中使用this。 
+  - 区分类成员属性和方法的形参. 
+  - 调用当前对象的其他方法（可以省略）
+  - 位置：任意
+
+- 构造方法中使用this。 
+
+  - 使用this来调用其它构造方法
+
+  - 位置：必须是第一条语句
+
+- this不能用于static方法。（学完static，就知道为什么了）
+
+```java
+/*
+* this:表示当前对象的指针
+*   指向当前对象，表示当前对象的引用
+* 用处：
+*       1、构造方法，当构造方法中的参数名称跟类的成员变量名称一样的时候，可以使用this代表当前对象
+*               注意：有了this之后，可以将构造方法的参数跟成员变量保持一致
+*               当构造方法中需要调用其他的构造方法时，可以使用this(name)调用其他构造方法，但是必须位于方法体的第一行
+*       2、普通方法中：
+*           当多个普通方法之间需要调用的时候，可以使用this来进行调用，指的是当前对象的其他方法
+*       3、成员变量的使用：
+*           当方法中的参数名称跟成员变量保持一致的时候，使用 this.变量名称 表示的是对象的值，而使用变量名称表示形参列表中的值
+* */
+public class ThisDemo {
+
+    String name;
+    int age;
+
+    public ThisDemo(){
+
+    }
+
+    public ThisDemo(String name){
+        System.out.println("one");
+        this.name = name;
+    }
+
+    public ThisDemo(String name,int age){
+        this(name);
+        System.out.println("two");
+        this.age = age;
+
+    }
+
+    public void test1(){
+        System.out.println("test1");
+    }
+    public void test2(String name){
+        System.out.println("test2");
+        test1();
+        System.out.println(name);
+        System.out.println(this.name);
+    }
+
+
+    public static void main(String[] args) {
+        ThisDemo td = new ThisDemo("zhangsan",12);
+        System.out.println(td.name);
+        System.out.println(td.age);
+        td.test2("lisi");
+    }
+
+}
+/*
+输出
+one
+two
+zhangsan
+12
+test2
+test1
+lisi
+zhangsan
+*/
+```
+
+<br>
+
+<br>
+
+### static 关键字
+
+#### static 修饰成员变量
+
+- 在类中，用static声明的**成员变量**为**静态成员变量** ,又称为 **类属性**，**类变量**。
+  - 它为该类的公用变量，归属于类，被该类的所有实例（对象）共享，在类被载入时被显式初始化，
+  - 对于该类的所有对象来说，static成员变量只有一份。被该类的所有对象共享！！
+  - 可以使用**”对象.类属性”**来调用。不过，一般都是用**“类名.类属性”** 来调用
+  - static变量置于方法区中！
+
+#### static 修饰方法
+
+- 在类中，用static声明的**方法**为**静态方法**，又称为**类方法**
+  - 不需要对象，就可以调用(类名.方法名)
+  - 在调用该方法时，不会将对象的引用传递给它，所以在static方法中不可访问非static的成员。
+  - 静态方法不能以任何方式引用this和super关键字
+
+#### 静态属性的访问方式
+
+- **类名.属性**
+- 对象名.属性
+
+#### 静态方法的访问方式
+
+- 创建：访问修饰符 static 返回值类型 方法名 () {}
+- 访问方式：**类名.方法名();**  or  对象名.方法名(); 、
+
+#### 注意
+
+1. 静态变量，在创建对象之前被初始化，或者说在类被载入之前进行初始化
+2. 静态变量被所有的对象共享，属于公共变量，对象和类都可以直接调用，但是推荐使用类来调用
+3. 成员变量放在堆中，而静态变量放在方法去中静态区
+4. 静态变量不能定义在静态方法中
+5. 静态方法可以在非静态方法中进行调用
+6. 静态方法中不能直接调用非静态方法
+7. 静态方法中不允许出现this调用
+8. 一般工具类中的方法定义为static
+
+```java
+/*
+* static:
+*       修饰成员变量的时候，表示静态成员变量或者叫类变量
+*           普通变量在使用的时候，必须要通过对象名进行调用
+*           类变量或者静态变量可以使用对象名调用也可以使用类名进行调用
+*       修饰方法的时候，表示静态方法或者叫类方法
+*           普通方法在使用的时候，必须要通过对象名进行调用
+*           类方法或者静态方法可以使用类名，也可以使用对象名
+* */
+public class StaticDemo {
+
+    String name = "zhangsan";
+    static int age = 10; //修饰成员变量
+
+    public static void test(){ //修饰方法
+        System.out.println("static"); 
+    }
+
+    public void test2(){
+        test(); //普通方法中调用静态方法
+    }
+    public static void main(String[] args) {
+        StaticDemo staticDemo = new StaticDemo();
+        
+        //修饰成员变量
+        //使用对象进行调用或使用类名调用
+        System.out.println(staticDemo.name);
+        System.out.println(staticDemo.age);//10
+
+        staticDemo.age = 20;
+        System.out.println(staticDemo.age);//20
+        System.out.println(StaticDemo.age);//20
+        StaticDemo.age = 30;
+        System.out.println(staticDemo.age);//30
+        System.out.println(StaticDemo.age);//30
+
+        StaticDemo staticDemo1= new StaticDemo();
+        System.out.println(staticDemo1.age);//30
+		
+        //修饰方法
+        StaticDemo sd = new StaticDemo();
+        sd.test(); //通过对象名进行调用
+        StaticDemo.test(); //通过类名进行调用
+        sd.test2(); //普通方法中调用静态方法
+
+        StaticDemo staticDemo = null;
+        staticDemo.test2();
+
+    }
+}
+```
+
+#### 区别
+
+|          | static、非private修饰                                  | 非static、private修饰     |
+| -------- | ------------------------------------------------------ | ------------------------- |
+| 属性     | 类属性、类变量                                         | 实例属性、实例变量        |
+| 方法     | 类方法                                                 | 实例方法                  |
+| 调用方式 | 类名.属性<br>类名.方法()<br/>对象.属性<br/>对象.方法() | 对象.属性<br/>对象.方法() |
+| 归属     | 类                                                     | 单个对象                  |
+
+
+
