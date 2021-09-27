@@ -1,5 +1,9 @@
 # java面向对象
 
+<br>
+
+<br>
+
 ## 面向过程编程/面向对象编程
 
 - 第一代：机器语言。第二代：汇编语言。第三代：高级语言：1.面向过程（C,Fortran,COBOL,PASCAL,ADA）2.面向对象（java,C#,C++）。
@@ -481,10 +485,6 @@ public class StaticDemo {
         sd.test(); //通过对象名进行调用
         StaticDemo.test(); //通过类名进行调用
         sd.test2(); //普通方法中调用静态方法
-
-        StaticDemo staticDemo = null;
-        staticDemo.test2();
-
     }
 }
 ```
