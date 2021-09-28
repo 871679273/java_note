@@ -7,11 +7,12 @@
 ## 面向过程编程/面向对象编程
 
 - 第一代：机器语言。第二代：汇编语言。第三代：高级语言：1.面向过程（C,Fortran,COBOL,PASCAL,ADA）2.面向对象（java,C#,C++）。
-- 区别：
+- ##### 区别：
+  
   - 面向过程：事物比较简单，可以用线性的思维去解决
   - 面向对象：事物比较复杂，使用简单的线性思维无法解决
-
-- 共同点：
+  
+- ##### 共同点：
 
   - 面向过程和面向对象都是解决实际问题的一种思维方式
 
@@ -43,7 +44,9 @@
 
 #### 2. 类
 
-- 属性 field。或称成员变量。
+- ##### 属性 field。
+
+  或称成员变量。
 
   - 用于：定义该类或该类对象包含的数据或者说静态属性。
 
@@ -51,7 +54,7 @@
 
   - 变量初始化：在定义成员变量时可以对其初始化。如果不对其初始化，Java使用默认的值对其初始化。
 
-- 定义格式：
+- ##### 定义格式：
 
   - 类：1.定义类名。2.编写类的属性。3.编写类的方法。
 
@@ -82,11 +85,20 @@
     }
     ```
 
+- ##### 类的所有组件
+
+  定义类的时候需要包含以下组件：
+
+  1. 私有属性
+  2. 构造方法（无参构造方法和自定义构造方法）
+  3. set/get方法
+  4. 普通方法
+
 <br>
 
 #### 3.对象
 
-- 对象的创建和使用
+- ##### 对象的创建和使用
 
   - new关键字来创建对象
 
@@ -129,13 +141,15 @@
 
 ## 局部变量和成员变量
 
-- 局部变量：
+- ##### 局部变量：
+  
   - 定义在方法中的变量
   - 作用域：从定义的位置开始到整个方法结束。只能在当前方法中使用，其他地方无法使用。
   - 内存存放空间：栈 stack
   - 无默认值。不使用时可以不赋值，使用时没有赋值的话会报错。
   - 不同方法中即使有同名的局部变量，没有关系，互不影响，建议相同
-- 成员变量：
+- ##### 成员变量：
+  
   - 定义在方法外，类内的变量叫做成员变量（全局变量） 
   - 作用域：整个类体内
   - 内存存放空间：堆 heap
@@ -664,7 +678,7 @@ public class ImportDemo {
 
 ## 封装
 
-面向对象三大特征之一 ：封装
+面向对象三大特征之一 ：封装 encapsulation
 
 #### 封装
 
@@ -687,11 +701,155 @@ public class ImportDemo {
 
 #### 如何使用封装
 
-封装的步骤
+- ##### 封装的步骤
 
 1. 修改属性的可见性 （设为private）
 2. 创建公有的getter/setter方法 （用于属性的读写）
 3. 在getter/setter方法中加入属性控制语句 （对属性值的合法性进行判断）
 
+- ##### idea 快捷键：
+
+  https://blog.csdn.net/sinat_41226396/article/details/80770520
+
 ![2021-09-28_180459](/image/2021-09-28_180459.jpg)
+
+Dog.java：
+
+```java
+package com.mashibing;
+
+/*
+*   定义类的时候需要包含以下组件：
+*       私有属性
+*       构造方法（无参构造方法和自定义构造方法）
+*       set/get方法
+*       普通方法
+* */
+
+public class Dog {
+    //私有属性
+    private String name;
+    private int age;
+    private String color;
+    
+    //构造方法
+    public Dog(){
+    }
+    public Dog(String name,int age,String color){
+        this.name = name;
+        if(age>0){
+            this.age = age;
+        }else{
+            System.out.println("年龄不规范");
+        }
+        this.color = color;
+    }
+	
+    //setter & getter
+    public void setAge(int age){
+        if(age>0){
+            this.age = age;
+        }else{
+            System.out.println("输入年龄不规范，重新输入");
+        }
+    }
+    public int getAge(){
+        return this.age;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return this.name;
+    }
+    public void setColor(String color){
+        this.color = color;
+    }
+    public String getColor(){
+        return this.color;
+    }
+	
+    //普通方法
+    public void eat(){
+        System.out.println("eating 骨头");
+    }
+    public void play(){
+        System.out.println("palying....");
+    }
+    public void show(){
+        System.out.println("name:"+this.name);
+        System.out.println("age:"+this.age);
+        System.out.println("color:"+this.color);
+    }
+}
+```
+
+DogTest.java
+
+```java
+package com.mashibing;
+
+/*
+* 封装：
+*       概念：
+*           将类的某些信息隐藏在类内部，不允许外部程序直接访问，
+*           而是通过该类提供的方法来实现对隐藏信息的操作和访问
+*       封装解决什么问题：
+ *          如果任何一个处理类都可以直接对Dog进行赋值操作，那么当值不准确的时候，可以回产生额外的结果，
+*           如何在赋值的同时添加一些逻辑判断呢？
+*               封装可以解决此问题
+*       作用：
+*           使用封装可以保证数据的规范，不符合规范的数据将无法进行操作
+*       好处：
+*           1、隐藏类的内部实现细节
+*           2、只能通过提供的方法进行访问，其他方法无法访问
+*           3、可以根据需求添加复杂的逻辑判断语句
+*           4、方便修改实现
+*       面向对象的封装（狭义）可以用一句话概述： 为了保证数据安全和规范
+*           将类中的属性设置为私有属性，提供共有的外部方法供程序进行调用，可以实现丰富的细节操作
+*       广义的封装：
+*           可以将完成特定功能的代码块封装成一个方法，供不同的程序进行调用
+* */
+
+public class DogTest {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+//        dog.name="大黄"; //错
+//        dog.color="yellow"; //错
+//        dog.setAge(-20); //错
+        dog.setName("大黄");
+        dog.setAge(20);
+        dog.setColor("黄");
+        dog.show();
+        System.out.println(dog.getAge());
+    }
+}
+```
+
+<br>
+
+<br>
+
+## 面向对象的三大特征
+
+#### 继承 inheritance
+
+- 子类 父类
+- 子类可以从父类继承属性和方法
+- 子类可以提供自己单独的属性和方法
+
+#### 封装/隐藏encapsulation
+
+- 对外隐藏某些属性和方法
+- 对外公开某些属性和方法
+
+#### 多态 polymorphism
+
+- 为了适应需求的多种变化，使代码变得更加通用！
+
+面向过程只有封装性（功能的封装，而没有数据的封装），没有继承和多态
+
+<br>
+
+<br>
 
