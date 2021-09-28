@@ -314,15 +314,67 @@ public class Teacher {
 #### 形参和实参
 
 - 定义方法的参数是形式参数
+  - 方法中的参数列表叫做形式参数，没有具体的值，只是为了方便在方法体中使用
 - 调用方法的参数是实在参数
+  - 调用方法的时候实际传入的值叫实际参数，代表具体的数值，用来替换在方法体中代码逻辑的值进行运算
 - 调用方法时要求参数个数相同，类型兼容
+- 注意：
+  - 形式参数的变量名称也是局部变量
 
 #### 参数传递
 
+- java中的参数传递是值传递
+
 - 基本数据类型的参数传递
+  - 当方法的参数值是基本数据类型的时候，不会改变原来的值
   - 无法通过方法调用改变变量的值
 - 引用数据类型的参数传递
+  - 当方法的参数值是引用类型的时候，如果改变了该引用类型的值，会改变原来对象的值
   - 可以通过方法调用改变变量的值
+
+```java
+public class ArgumentDemo {
+
+    public static void test(int a,int b){
+        int tmp = a;
+        a = b;
+        b = tmp;
+    }
+	
+    public static void test2(Point point){ //提前定义了一个Point类
+        int x = point.getX();
+        int y = point.getY();
+        int tmp = x;
+        x = y;
+        y = tmp;
+        point.setX(x);
+        point.setY(y);
+    }
+
+    public static void main(String[] args) {
+        //test1
+        int a = 10;
+        int b = 20;
+        test(a,b);
+        System.out.println(a);// 10
+        System.out.println(b);// 20
+       
+        //test2
+        Point point = new Point(2,3);
+        test2(point);
+        System.out.println(point.getX());
+        System.out.println(point.getY());
+    }
+}
+```
+
+test1
+
+![2021-09-28_205314](/image/2021-09-28_205314.jpg)
+
+test2
+
+![2021-09-28_205114](/image/2021-09-28_205114.jpg)
 
 <br>
 
@@ -827,6 +879,63 @@ public class DogTest {
 
 <br>
 
+## 访问控制符
+
+使用访问控制符，实现封装
+
+#### 成员的访问权限
+
+成员（成员变量或成员方法）访问权限共有四种：
+
+- public 公共的
+  - 可以被项目中所有的类访问。(项目可见性) 
+- protected 受保护的 
+  - 可以被这个类本身访问；
+  - 可以被同一个包中的所有其他的类访问；
+  - 被它的子类（同一个包以及不同包中的子类）访问
+
+- default／friendly 默认的/友好的（包可见性） 
+  - 被这个类本身访问
+  - 被同一个包中的类访问。
+
+- private 私有的 
+  - 只能被这个类本身访问。（类可见性）
+
+|          | publc | protected | default | private |
+| -------- | ----- | --------- | ------- | ------- |
+| 所有类   | *     |           |         |         |
+| 子类     | *     | *         |         |         |
+| 同一个包 | *     | *         | *       |         |
+| 同一个类 | *     | *         | *       | *       |
+
+#### 类的访问权限
+
+类的访问权限只有两种
+
+- public 公共的
+  - 可被同一项目中所有的类访问。 (必须不文件名同名) 
+
+- default／friendly 默认的/友好的
+  - 可被同一个包中的类访问。
+
+一个java文件里面只能有一个public class 且类名和文件名相同
+
+#### 封装要点
+
+- ##### 类的属性的处理:
+
+  1. 一般使用private. (除非本属性确定会让子类继承)
+  2. 提供相应的get/set方法来访问相关属性. 这些方法通常是**public**从而提供对属性的读取操作。 （注意：boolean变量的get方法是用：is开头!） 
+
+- ##### 类的方法的处理：
+
+  1. 一些只用于本类的辅助性方法可以用private
+  2.  **希望其他类调用的方法用public**
+
+<br>
+
+<br>
+
 ## 面向对象的三大特征
 
 #### 继承 inheritance
@@ -849,8 +958,4 @@ public class DogTest {
 <br>
 
 <br>
-
-## 访问控制符
-
-使用访问控制符，实现封装
 
