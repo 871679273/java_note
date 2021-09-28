@@ -504,19 +504,25 @@ public class StaticDemo {
 
 ## 代码块
 
-- **概念:**使用”{}”括起来的一段代码
+#### 概念
 
-- **分类：**根据位置可分类
-  - 普通代码块：直接在方法或语句中定义的代码块
-  - 构造代码块：直接写在类中的代码块
-  - 静态代码块：使用static声明的代码块
-  - 同步代码块：多线程的时候会学到
+使用”{}”括起来的一段代码
 
-- 静态代码块初始化
-  - 如果希望加载后，对整个类进行某些初始化操作，可以使用static初始化块。
-  - 类第一次被载入时先执行static代码块；类多次载入时，static代码块只执行一次；Static经常用来进行static变量的初始化。
-  - 是在类初始化时执行，不是在创建对象时执行。
-  - 静态初始化块中不能访问非static成员
+#### 分类
+
+根据位置可分类
+
+- 普通代码块：直接在方法或语句中定义的代码块
+- 构造代码块：直接写在类中的代码块
+- 静态代码块：使用static声明的代码块
+- 同步代码块：多线程的时候会学到
+
+#### 静态代码块初始化
+
+- 如果希望加载后，对整个类进行某些初始化操作，可以使用static初始化块。
+- 类第一次被载入时先执行static代码块；类多次载入时，static代码块只执行一次；Static经常用来进行static变量的初始化。
+- 是在类初始化时执行，不是在创建对象时执行。
+- 静态初始化块中不能访问非static成员
 
 ```java
 /*
@@ -587,4 +593,72 @@ main
 <br>
 
 ## package
+
+#### package
+
+- 为什么需要package? 
+  - 为了解决类之间的重名问题。 (文件同名问题)
+  - 为了便于管理类：合适的类位于合适的包！(将具体处理功能的代码放到同一个目录下)
+- package怎么用? 
+  - 通常是类的第一句非注释性语句。( 一般定义package会放置在java文件的第一行)
+  - 包名：域名倒着写即可，再加上模块名，并与内部管理类。
+    - package 域名的倒写
+    - package com.mashibing;
+- 注意事项：
+  - 写项目时都要加包，不要使用默认包。
+  - com.gao和com.gao.car，这两个包没有包含关系，是两个完全独立的包。只是逻辑上看起来后者是前者的一部分。
+
+#### JDK中常用的包：
+
+- java.lang：不需要手动导入，自动加载。包含一些Java语言的核心类，如String、Math、Integer、System和Thread，提供常用功能。
+- java.util：工具包。包含一些实用工具类，如定义系统特性、使用不日期日历相关的函数。
+- java.net：网络包。包含执行不网络相关的操作的类。
+- java.io：输入输出流包。包含能提供多种输入/输出功能的类。
+- java.awt：包含了构成抽象窗口工具集（abstract window toolkits）的多个类，这些类被用来构建和管理应用程序的图形用户界面(GUI)。
+
+<br>
+
+<br>
+
+## import
+
+当需要引入非lang包的其他java类的时候，需要使用import工具<br>
+
+如果不使用import，每次在使用某个类的时候必须要将类的完全限定名都加上才可以使用，太过于繁琐
+
+#### 用法
+
+- import java.包名.类名；导入具体的类  推荐使用
+- import 包名.*;    将当前包下的所有类文件都进行导入
+- 写在package行下面
+
+#### 注意
+
+- 当一个java文件中需要使用多个同名的类的时候，只能选择导入一个，另一个使用完全限定名的方式进行导入
+
+#### 静态导包
+
+- 当需要使用某个类的多个方法的时候，同时又不想频繁写该类的名称，此时可以使用静态导包
+- import static java.lang.Math.*; //导入Math类的所有静态属性
+- import static java.lang.Math.PI; //导入Math类的PI属性
+- 然后，我们可以在程序中直接使用：System.*out*.println(*PI*);
+
+```java
+package com.mashibing;
+
+import java.util.Date;
+import static java.lang.Math.*;
+
+public class ImportDemo {
+
+    public static void main(String[] args) {      
+        System.out.println(Math.sqrt(2));
+        System.out.println(sqrt(2));//静态导包后
+    }
+}
+```
+
+<br>
+
+<br>
 
