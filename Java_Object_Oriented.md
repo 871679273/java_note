@@ -979,6 +979,41 @@ class Dog extend Pet{ //只能继承一个父类
 }
 ```
 
+#### super 关键字
+
+**super:是 直接父类 对象的引用**
+
+- 用途：
+
+1. ​	可以在子类中调用父类中被子类覆盖的方法
+
+   ```java
+   class Pet{
+   	//公共的属性和方法
+       private void play(){
+           System.out.println("play.....");
+       }
+   }
+   ```
+
+   ```java
+   class Dog extend Pet{
+   	//子类特有的属性和方法
+       public void play(){
+           super.play();//父类中被子类覆盖的方法
+           System.out.println("dog is playing ball");
+       }
+   }
+   
+   /*
+   main中创建对象dog后，写dog.play();会输出：
+   play.....
+   dog is playing ball
+   */
+   ```
+
+2. 
+
 <br>
 
 <br>
