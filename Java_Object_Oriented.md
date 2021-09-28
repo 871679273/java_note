@@ -981,7 +981,7 @@ class Dog extend Pet{ //只能继承一个父类
 
 #### super 关键字
 
-**super:是 直接父类 对象的引用**
+super:是 直接父类 对象的引用
 
 - 用途：
 
@@ -1012,7 +1012,9 @@ class Dog extend Pet{ //只能继承一个父类
    */
    ```
 
-2. 
+2. x
+
+3. 
 
 <br>
 
