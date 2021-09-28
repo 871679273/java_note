@@ -985,11 +985,15 @@ super:是 直接父类 对象的引用
 
 - 用途：
 
-1. ​	可以在子类中调用父类中被子类覆盖的方法
+1. ​	可以通过super来访问父类中被子类覆盖的方法或属性：
+
+   - super.父类方法 ();
+   - super.父类属性;
+   - （在普通方法中的位置无要求）
 
    ```java
    class Pet{
-   	//公共的属性和方法
+   	//... 公共的属性和方法
        private void play(){
            System.out.println("play.....");
        }
@@ -998,7 +1002,7 @@ super:是 直接父类 对象的引用
 
    ```java
    class Dog extend Pet{
-   	//子类特有的属性和方法
+   	//... 子类特有的属性和方法
        public void play(){
            super.play();//父类中被子类覆盖的方法
            System.out.println("dog is playing ball");
@@ -1012,9 +1016,52 @@ super:是 直接父类 对象的引用
    */
    ```
 
-2. x
+2. 当super在构造方法中使用的话，会调用父类的构造方法，
 
-3. 
+   - super(name,age,gender); 
+
+   - 一定要将super放在第一行
+   - 在构造方法中，不能同时使用 super()去调用构造方法和this()去调用构造方法。
+
+   ```java
+   class Pet{
+   	//... 公共的属性和方法
+       public Pet(){
+           System.out.println("pet 无参构造方法");
+       }
+       public Pet(String name, int age, String gender) {
+   //        this();
+           this.name = name;
+           this.age = age;
+           this.gender = gender;
+       }
+   }
+   ```
+
+   ```java
+   class Dog extend Pet{
+   	//... 子类特有的属性和方法
+       public Dog(String name, int age, String gender, String sound) {
+           super(name,age,gender); //必须放在第一行
+           //this();  不能用
+           this.sound = sound;
+       }
+   }
+   // 不会输出：pet 无参构造方法。除非在父类含参数构造方法中写this();
+   ```
+
+3. 父类中私有private的属性和方法都不能被调用，包括构造方法
+
+4. 任何类的构造函数中，若是构造函数的第一行代码没有显式的调用super(...);那么Java默认都会调用super();作为父类的初始化函数。 所以你这里的super();加不加都无所谓。
+
+5. 子类的构造方法中都会默认使用super关键字调用父类的无参构造方法,因此在定义任何类的时候，无论自己是否自定义了其他构造方法，最好将无参构造方法写上
+
+6. 如果构造方法中显式的指定了super的构造方法，那么无参的构造方法就不会被调用
+
+### 总结
+
+1. 在创建子类对象的时候一定会优先创建父类对象
+2. 所有的java类都具备同一个老祖宗类，称之为Object（java.lang.Object），是所有类的根类。（int,Date也是类）
 
 <br>
 
