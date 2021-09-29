@@ -1209,6 +1209,11 @@ java中的对象是对现实世界的具象化，但是在现实世界中，某�
 
 - 创建抽象类的时class前添加 abstract 的关键字（即public abstract class）。抽象类不再能进行实例化，也就是不能new出对象。
 - 父类中使用abstract关键字修饰的方法叫做抽象方法，可以不写方法的实现。但子类在继承抽象父类的时候，必须要将父类中的抽象方法进行实现或者将子类也定义为抽象类
+- 抽象方法没有方法体
+  - 抽象方法必须在抽象类中
+  - 抽象方法必须在子类中被实现，除非子类是抽象类
+
+- 有抽象方法的一定是抽象类，但是抽象类中不一定包含抽象方法
 
 ```java
 public abstract class Pet { //抽象类
@@ -1242,7 +1247,23 @@ public abstract class Dog extends Pet{ //抽象该子类
 }
 ```
 
-- 
+<br>
+
+<br>
+
+## final
+
+final的使用：
+
+* final可以**修饰变量**：
+  *               表示变量的值不可变
+  *               public final int age = 10;
+* final可以**修饰方法**：
+  *               表示方法不可以被重写
+  *               public final void test(){}
+* final可以**修饰类**：
+  *               表示类不可以被继承
+  *               public final class Penguin extends Pet{}
 
 <br>
 
