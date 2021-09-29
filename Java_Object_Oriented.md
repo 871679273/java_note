@@ -1300,15 +1300,76 @@ class Test{
 
 ## Object类
 
+3.9-Object,多态 1.mp4   00:16:00
+
 - **Object类是所有类的父类**
 
-  一个类如果没有使用extends显性的继承另外一个类，那么这个类就继承自Object类
+  - 一个类如果没有使用extends显性的继承另外一个类，那么这个类就继承自Object类
+  - 打开Object.java：idea中双击shift，搜索Object.java，include none-project items.
 
   ```java
   public class Person{
   }
   //等同于
   public class Person extends Object{
+  }
+  ```
+
+- 方法
+
+  ```java
+  package java.lang;
+  import jdk.internal.vm.annotation.IntrinsicCandidate;
+  
+  public class Object {
+      // 构造方法
+      @IntrinsicCandidate
+      public Object() {}
+  	
+      // getClass()
+      @IntrinsicCandidate
+      public final native Class<?> getClass();
+  
+  	// hashCode() 哈希码
+      @IntrinsicCandidate
+      public native int hashCode();
+  
+  	// equals() 判断值相等
+      public boolean equals(Object obj) {
+          return (this == obj);
+      }
+  
+  	// clone() 克隆
+      @IntrinsicCandidate
+      protected native Object clone() throws CloneNotSupportedException;
+  
+  	// toString() 打印地址
+      public String toString() {
+          return getClass().getName() + "@" + Integer.toHexString(hashCode());
+      }
+  
+  	// notify(),notifyAll(),wait(),wait(long),wait(long,int) 与多线程相关
+      @IntrinsicCandidate
+      public final native void notify();
+      @IntrinsicCandidate
+      public final native void notifyAll();
+      public final native void wait(long timeoutMillis) throws InterruptedException;
+      public final void wait(long timeoutMillis, int nanos) throws InterruptedException {
+          if (timeoutMillis < 0) {
+              throw new IllegalArgumentException("timeoutMillis value is negative");
+          }
+          if (nanos < 0 || nanos > 999999) {
+              throw new IllegalArgumentException(
+                                  "nanosecond timeout value out of range");
+          }
+          if (nanos > 0 && timeoutMillis < Long.MAX_VALUE) {
+              timeoutMillis++;
+          }
+          wait(timeoutMillis);
+      }
+      @Deprecated(since="9")
+      
+      protected void finalize() throws Throwable { }
   }
   ```
 
