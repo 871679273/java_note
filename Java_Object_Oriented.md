@@ -1056,11 +1056,144 @@ super:是 直接父类 对象的引用
 2. 任何类的构造函数中，若是构造函数的第一行代码没有显式的调用super(...);那么Java默认都会调用super();作为父类的初始化函数。 所以你这里的super();加不加都无所谓。
 3. 子类的构造方法中都会默认使用super关键字调用父类的无参构造方法,因此在定义任何类的时候，无论自己是否自定义了其他构造方法，最好将无参构造方法写上
 4. 如果构造方法中显式的指定了super的构造方法，那么无参的构造方法就不会被调用
+5. 不能被继承的父类成员：
+   - 不能直接访问private成员
+   - 子类与父类不在同包，使用默认访问权限的成员
+   - 构造方法
+6. 多重继承关系的初始化顺序：父类属性——》父类构造方法——》子类属性——》子类构造方法
+
+**小结**
+
+- super只能出现在子类的方法和构造方法中
+- super调用构造方法时，只能是第一句
+- super和this不能同时出现在构造方法中
+- super不能访问父类的private成员
+- super和this都不能再static方法中
 
 ### 总结
 
 1. 在创建子类对象的时候一定会优先创建父类对象
 2. 所有的java类都具备同一个老祖宗类，称之为Object（java.lang.Object），是所有类的根类。（int,Date也是类）
+3. java中的多继承，可以通过接口来实现
+4. 如果定义一个类时，没有调用extends,则它的父类是java.lang.Object
+5. 静态方法能被继承，不能被重写
+
+<br>
+
+<br>
+
+## 方法重写 override
+
+必须要存在继承关系，当父类中的方法无法满足子类需求的时候可以选择使用重写的方式
+
+- 使用：
+  - @override
+
+*   注意：
+    1. 重写表示的是子类覆盖父类的方法，当覆盖之后，调用同样的方法的时候会优先调用子类
+    2. 重写的方法名称，返回值类型，参数列表必须跟父类一直
+    3. 子类重写的方法不允许比父类的方法具备更小的访问权限（由于多态）
+       - 父类      public     子类  public
+       - 父类      protected     子类  public protected
+       - 父类      default     子类  public protected  default
+*   重写toString()
+    *   toString()的特殊用法：父类中重写Object类的toString()方法,使得System.out.println(对象)时可以打印出对象的属性
+*   父类的静态方法子类可以进行调用(可以被继承)，但是子类不可以重写父类的静态方法
+
+```java
+// 普通重写
+
+// Pet.java中
+public class Pet {
+	//......
+    private void play(){
+        System.out.println("play.....");
+    }
+}
+
+// Dog.java中
+public class Penguin extends Pet{
+	//......
+    @Override
+    public void play(){
+        System.out.println("penguin is playing ice"); //重写了
+    }
+}
+```
+
+```java
+// 特殊用法
+// 在父类中，重写java.lang.Object类的toString()方法（该父类的父类是Object）
+
+// Pet.java中重写Object类的toString() [test1]
+public class Pet {
+	//......
+    @Override
+    private String toString(){
+        return "my name is "+this.name+",my age is "+this.age+",my gender is "+this.gender;
+    }
+}
+
+// Dog.java中重写Pet类的toString() [test2]
+public class Dog extends Pet{
+	//......
+    @Override
+    public String toString(){
+        return super.toString()+",my sound is "+this.sound;
+    }
+}
+
+// PetTest.java中调用toString()
+public class PetTest {
+    public static void main(String[] args) {
+        //test1
+        Pet pet = new Pet();
+        System.out.println(pet);//这里println一个pet对象
+        /*
+        重写前,会打印：com.mashibing.extend.Pet@4f023edb (打印地址)
+        重写后，会打印：my name is null,my age is 0,my gender is null (打印出属性)
+        */
+        
+        //test2
+        Dog dog = new Dog();
+        System.out.println(dog);
+        /*
+        重写前，会打印：my name is null,my age is 0,my gender is null
+        重写后，会打印：my name is null,my age is 0,my gender is null,my sound is null
+        */
+    }
+}
+```
+
+```java
+// 父类的静态方法子类可以进行调用，但是子类不可以重写
+
+// Pet.java中
+public class Pet {
+	//......
+    public static void test(){
+        System.out.println("static test");
+    }
+}
+
+// Dog.java中，这样写是不行的
+public class Dog extends Pet{
+	//......
+    @Override //不允许重写
+    public static void test(){ //不允许重写
+        System.out.println("子类 test"); //不允许重写
+    }
+}
+
+// PetTest.java中
+public class PetTest {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+		dog.test();
+        //子类Dog中没有重写静态方法，静态方法可以被子类继承和调用，此时输出：static test
+    }
+}
+```
 
 <br>
 
