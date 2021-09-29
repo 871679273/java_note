@@ -1205,11 +1205,44 @@ public class PetTest {
 
 ### 抽象类 abstract class
 
+java中的对象是对现实世界的具象化，但是在现实世界中，某些类并不具备实例化的意义，因此可以定义为抽象类
 
+- 创建抽象类的时class前添加 abstract 的关键字（即public abstract class）。抽象类不再能进行实例化，也就是不能new出对象。
+- 父类中使用abstract关键字修饰的方法叫做抽象方法，可以不写方法的实现。但子类在继承抽象父类的时候，必须要将父类中的抽象方法进行实现或者将子类也定义为抽象类
 
+```java
+public abstract class Pet { //抽象类
+    private String name;
+    private int age;
+    
+    public abstract void print();//抽象方法
+}
+```
 
+```java
+//使用以下两种方式才不会出错：
 
+//必须：方式一：必须重写其抽象方法进行实现（一般只这样用）
+public class Dog extends Pet{
+    private String gender;
+	
+    //重写实现
+    @Override
+    public void print() { 
+        System.out.println("dog print"); 
+    }
+}
 
+//必须：方式二：或者将子类也定义为抽象类 （一般不这样用）
+public abstract class Dog extends Pet{ //抽象该子类
+    private String gender;
+	
+    @Override
+    public abstract void print(); //抽象该方法
+}
+```
+
+- 
 
 <br>
 
