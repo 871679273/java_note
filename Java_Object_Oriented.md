@@ -1096,9 +1096,10 @@ super:是 直接父类 对象的引用
        - 父类      public     子类  public
        - 父类      protected     子类  public protected
        - 父类      default     子类  public protected  default
-*   重写toString()
+*   重写toString()：
     *   toString()的特殊用法：父类中重写Object类的toString()方法,使得System.out.println(对象)时可以打印出对象的属性
 *   父类的静态方法子类可以进行调用(可以被继承)，但是子类不可以重写父类的静态方法
+*   构造方法不能重写（因为构造方法不会被继承）
 
 ```java
 // 普通重写
