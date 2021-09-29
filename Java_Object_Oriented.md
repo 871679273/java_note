@@ -503,18 +503,33 @@ zhangsan
 ### 静态方法的访问方式
 
 - 创建：访问修饰符 static 返回值类型 方法名 () {}
-- 访问方式：**类名.方法名();**  or  对象名.方法名(); 、
+- 访问方式：**类名.方法名();**  or  对象名.方法名(); 
 
 ### 注意
 
 1. 静态变量，在创建对象之前被初始化，或者说在类被载入之前进行初始化
+
 2. 静态变量被所有的对象共享，属于公共变量，对象和类都可以直接调用，但是推荐使用类来调用
+
 3. 成员变量放在堆中，而静态变量放在方法去中静态区
+
 4. 静态变量不能定义在静态方法中
+
 5. 静态方法可以在非静态方法中进行调用
+
 6. 静态方法中不能直接调用非静态方法
+
 7. 静态方法中不允许出现this调用
+
 8. 一般工具类中的方法定义为static
+
+9. 在java中，无论在何处调用，使用静态属性必须以类名做前缀。**是错的** 
+
+   - 1如果是本类使用，可以直接就用静态变量名。
+
+   - 2如果是其他类使用，可以使用类名来调用，也可以创建一个实例对象来调用。
+
+   - 3如果静态变量所在的类是静态类，那么不管在本类里或者在其他外部类，都可以直接使用静态变量名。
 
 ```java
 /*
@@ -545,6 +560,7 @@ public class StaticDemo {
         //使用对象进行调用或使用类名调用
         System.out.println(staticDemo.name);
         System.out.println(staticDemo.age);//10
+        System.out.println(age);//10
 
         staticDemo.age = 20;
         System.out.println(staticDemo.age);//20
@@ -969,7 +985,7 @@ public class DogTest {
 
 ### 使用
 
-1. 使用继承的时候需要使用**extend**关键字
+1. 使用继承的时候需要使用**extends**关键字
 2. 使用继承关系之后，**父类中的属性和方法都可以在子类中进行使用**(私有属性和私有方法不能在子类中被调用)
 3. java中是**单继承关系**(因为如果包含多个父类，同时父类中包含重名方法，无法决定改调用谁)
 
@@ -980,7 +996,7 @@ class Pet{
 ```
 
 ```java
-class Dog extend Pet{ //只能继承一个父类
+class Dog extends Pet{ //只能继承一个父类
 	//子类特有的属性和方法
 }
 ```
@@ -1009,7 +1025,7 @@ super:是 直接父类 对象的引用
    ```
 
    ```java
-   class Dog extend Pet{
+   class Dog extends Pet{
    	//... 子类特有的属性和方法
        public void play(){
            super.play();//父类中被子类覆盖的方法
@@ -1047,7 +1063,7 @@ super:是 直接父类 对象的引用
    ```
 
    ```java
-   class Dog extend Pet{
+   class Dog extends Pet{
    	//... 子类特有的属性和方法
        public Dog(String name, int age, String gender, String sound) {
            super(name,age,gender); //必须放在第一行
@@ -1256,7 +1272,7 @@ public abstract class Dog extends Pet{ //抽象该子类
 final的使用：
 
 * final可以**修饰变量**：
-  * 表示变量的值不可变
+  * 表示变量的值不可变（常量，等于其他语言的constant）
   * public final int age = 10;
   * 使用final修饰引用型变量，变量不可以再指向另外的对象
     * 使用final修饰引用型变量，变量的值是固定不变的，而变量所指向的对象的属性值是可变的
@@ -1277,6 +1293,26 @@ class Test{
 * final可以**修饰类**：
   * 表示类不可以被继承
   * public final class Penguin extends Pet{}
+
+<br>
+
+<br>
+
+## Object类
+
+- **Object类是所有类的父类**
+
+  一个类如果没有使用extends显性的继承另外一个类，那么这个类就继承自Object类
+
+  ```java
+  public class Person{
+  }
+  //等同于
+  public class Person extends Object{
+  }
+  ```
+
+  
 
 <br>
 
