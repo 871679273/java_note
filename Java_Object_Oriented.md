@@ -806,6 +806,8 @@ public class ImportDemo {
 
 - ##### idea 快捷键：
 
+  Alt+Insert
+
   https://blog.csdn.net/sinat_41226396/article/details/80770520
 
 ![2021-09-28_180459](/image/2021-09-28_180459.jpg)
@@ -1302,78 +1304,101 @@ class Test{
 
 3.9-Object,多态 1.mp4   00:16:00
 
-- **Object类是所有类的父类**
+### Object类是所有类的父类
 
-  - 一个类如果没有使用extends显性的继承另外一个类，那么这个类就继承自Object类
-  - 打开Object.java：idea中双击shift，搜索Object.java，include none-project items.
+- 一个类如果没有使用extends显性的继承另外一个类，那么这个类就继承自Object类
+- 打开Object.java：idea中双击shift，搜索Object.java，include none-project items.
 
-  ```java
-  public class Person{
-  }
-  //等同于
-  public class Person extends Object{
-  }
-  ```
+```java
+public class Person{
+}
+//等同于
+public class Person extends Object{
+}
+```
 
-- 方法
+### 方法
 
-  ```java
-  package java.lang;
-  import jdk.internal.vm.annotation.IntrinsicCandidate;
-  
-  public class Object {
-      // 构造方法
-      @IntrinsicCandidate
-      public Object() {}
-  	
-      // getClass()
-      @IntrinsicCandidate
-      public final native Class<?> getClass();
-  
-  	// hashCode() 哈希码
-      @IntrinsicCandidate
-      public native int hashCode();
-  
-  	// equals() 判断值相等
-      public boolean equals(Object obj) {
-          return (this == obj);
-      }
-  
-  	// clone() 克隆
-      @IntrinsicCandidate
-      protected native Object clone() throws CloneNotSupportedException;
-  
-  	// toString() 打印地址
-      public String toString() {
-          return getClass().getName() + "@" + Integer.toHexString(hashCode());
-      }
-  
-  	// notify(),notifyAll(),wait(),wait(long),wait(long,int) 与多线程相关
-      @IntrinsicCandidate
-      public final native void notify();
-      @IntrinsicCandidate
-      public final native void notifyAll();
-      public final native void wait(long timeoutMillis) throws InterruptedException;
-      public final void wait(long timeoutMillis, int nanos) throws InterruptedException {
-          if (timeoutMillis < 0) {
-              throw new IllegalArgumentException("timeoutMillis value is negative");
-          }
-          if (nanos < 0 || nanos > 999999) {
-              throw new IllegalArgumentException(
-                                  "nanosecond timeout value out of range");
-          }
-          if (nanos > 0 && timeoutMillis < Long.MAX_VALUE) {
-              timeoutMillis++;
-          }
-          wait(timeoutMillis);
-      }
-      @Deprecated(since="9")
-      
-      protected void finalize() throws Throwable { }
-  }
-  ```
+```java
+package java.lang;
+import jdk.internal.vm.annotation.IntrinsicCandidate;
 
-  
+public class Object {
+    // 构造方法
+    @IntrinsicCandidate
+    public Object() {}
+	
+    // getClass()
+    @IntrinsicCandidate
+    public final native Class<?> getClass();
+
+	// hashCode() 哈希码
+    @IntrinsicCandidate
+    public native int hashCode();
+
+	// equals() 比较 (两个对象在调用的时候，idea自己会帮忙重写实现，来帮我们比较两个对象的值是否相同？)
+    public boolean equals(Object obj) {
+        return (this == obj);
+    }
+
+	// clone() 克隆
+    @IntrinsicCandidate
+    protected native Object clone() throws CloneNotSupportedException;
+
+	// toString() 打印地址
+    // 使用方法：println一个对象，则会显示该对象的地址。可以被重写。
+    public String toString() {
+        return getClass().getName() + "@" + Integer.toHexString(hashCode());
+    }
+
+	// notify(),notifyAll(),wait(),wait(long),wait(long,int) 与多线程相关
+    @IntrinsicCandidate
+    public final native void notify();
+    @IntrinsicCandidate
+    public final native void notifyAll();
+    public final native void wait(long timeoutMillis) throws InterruptedException;
+    public final void wait(long timeoutMillis, int nanos) throws InterruptedException {
+        if (timeoutMillis < 0) {
+            throw new IllegalArgumentException("timeoutMillis value is negative");
+        }
+        if (nanos < 0 || nanos > 999999) {
+            throw new IllegalArgumentException(
+                                "nanosecond timeout value out of range");
+        }
+        if (nanos > 0 && timeoutMillis < Long.MAX_VALUE) {
+            timeoutMillis++;
+        }
+        wait(timeoutMillis);
+    }
+    @Deprecated(since="9")
+    
+    protected void finalize() throws Throwable { }
+}
+```
+
+### 快捷重写
+
+Alt+Insert
+
+### 对象的比较--"=="和equals();
+
+- ==： 
+  - 比较两基本类型变量的值是否相等
+  - 比较两个引用类型（如String，对象）的值即内存地址是否相等，即是否指向同一对象。
+
+- equals() ： 
+  - 两对象的内容是否一致
+
+-  示例
+
+  - object1.equals(object2);  如：p1.equals(p2)
+    - 比较所指对象的内容是否一样
+    - 是比较两个对象，而非两个基本数据类型的变量
+
+  - object1 == object2;  如：p1==p2
+    - 比较p1和p2的值即内存地址是否相等，即是否是指向同一对象。
+
+- 自定义类须重写equals()，否则其对象比较结果总是false。*而String类已经重写了equals(),来比较其值。*
 
 <br>
 
