@@ -1269,8 +1269,8 @@ final的使用：
       class Test {
       	public static void main(String[] args) {
       		final Dog dog = new Dog("欧欧");
-          	dog.name = "美美"; 
-          	// dog = new Dog("亚亚");  不行。使用final修饰引用型变量，变量不可以再指向另外的对象
+              dog.name = "美美"; 
+              // dog = new Dog("亚亚");  不行。使用final修饰引用型变量，变量不可以再指向另外的对象
       	}
       }
       ```
