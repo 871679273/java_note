@@ -1256,32 +1256,25 @@ public abstract class Dog extends Pet{ //抽象该子类
 final的使用：
 
 * final可以**修饰变量**：
-
   * 表示变量的值不可变
-
   * public final int age = 10;
-
   * 使用final修饰引用型变量，变量不可以再指向另外的对象
-
     * 使用final修饰引用型变量，变量的值是固定不变的，而变量所指向的对象的属性值是可变的
 
-    * ```java
-      class Test {
-      	public static void main(String[] args) {
-      		final Dog dog = new Dog("欧欧");
-              dog.name = "美美"; 
-              // dog = new Dog("亚亚");  不行。使用final修饰引用型变量，变量不可以再指向另外的对象
-      	}
-      }
-      ```
+```java
+class Test{
+    public static void main(String[] args){
+        final Dog dog = new Dog("欧欧");
+        dog.name = "美美";
+        // dog = new Dog("亚亚"); 不行。使用final修饰引用型变量，变量不可以再指向另外的对象
+    }
+}
+```
 
 * final可以**修饰方法**：
-
   * 表示方法不可以被重写
   * public final void test(){}
-
 * final可以**修饰类**：
-
   * 表示类不可以被继承
   * public final class Penguin extends Pet{}
 
