@@ -1466,6 +1466,7 @@ Alt+Insert
   1. ***使用父类作为方法形参***
 
      ```java
+     // test1
      // Pet.java
      public abstract class Pet {
          public abstract void eat();
@@ -1509,6 +1510,7 @@ Alt+Insert
   2. ***使用父类作为方法返回值***
 
      ```java
+     // test2
      // Person.java
      public class Person{
          public Pet getPet(int type){  // 使用父类作为方法返回值
@@ -1545,16 +1547,23 @@ Alt+Insert
        - instanceof：对象 instanceof 类或接口 （instanceof通常和强制类型转换结合使用）
 
          ```java
+         // test3
          public class Master {
-         	public void play(Pet pet){
-          		if (pet instanceof Dog) { //如果传入的是狗狗
-          			Dog dog = (Dog) pet;
+         	public void play(Pet pet){ // 使用父类作为方法形参
+          		if (pet instanceof Dog) { // instanceof判断传入的是狗类
+          			Dog dog = (Dog) pet; // 强制类型转换 向下转型
           			dog.catchingFlyDisc();
-         		}else if (pet instanceof Penguin) { //如果传入的是企鹅
-          			Penguin pgn = (Penguin) pet;
+         		}else if (pet instanceof Penguin) { // instanceof判断传入的是企鹅
+          			Penguin pgn = (Penguin) pet; // 强制类型转换 向下转型
           			pgn.swimming();
                  } 
-             } 
+             }
+             public static void main(String[] args) {
+                 Pet pet = new Penguin();// 父类引用指向子类对象
+                 Person p = new Person();
+                 p.play(pet);
+                 pet.show();
+             }
          }
          ```
 
