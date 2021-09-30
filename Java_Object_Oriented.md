@@ -1463,17 +1463,50 @@ Alt+Insert
 
 * **实现多态的两种形式**：
 
-  1. 使用父类作为方法形参
+  1. ***使用父类作为方法形参***
 
      ```java
-     public class Master{
-         public void feed(Pet pet){ //使用父类作为方法形参
-             pet.eat();
+     // Pet.java
+     public abstract class Pet {
+         public abstract void eat();
+     }
+     
+     // Dog.java
+     public class Dog extends Pet{
+         @Override
+         public void eat() {
+             System.out.println("狗在吃骨头");
          }
      }
+     
+     // Cat.java
+     public class Cat extends Pet{
+         @Override
+         public void eat() {
+             System.out.println("猫在吃鱼");
+         }
+     }
+     
+     // Person.java
+     public class Person {
+         public void feed(Pet pet){ // 使用父类作为方法形参
+             pet.eat();
+         }
+         public static void main(String[] args) {
+             Person p = new Person();
+             Pet dog = new Dog(); // 父类引用指向子类对象
+             Pet cat = new Cat(); // 父类引用指向子类对象
+             p.feed(dog);
+             p.feed(cat);
+         }
+     }
+     /* 输出
+     狗在吃骨头
+     猫在吃鱼
+     */
      ```
 
-  2. 使用父类作为方法返回值
+  2. ***使用父类作为方法返回值***
 
      ```java
      public class Master{
