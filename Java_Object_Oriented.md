@@ -1456,9 +1456,9 @@ Alt+Insert
 
 * **多态的实现和规范**(多态实现的提前)：
 
-  1. 必须要有继承关系
-  2. 子类方法必须重写父类的方法
-  3. 父类引用指向子类对象
+  1. 必须要有**继承**关系
+  2. 子类方法必须**重写**父类的方法
+  3. **父类引用指向子类对象**
      - 向上转型 Pet pet = new Dog(); (自动类型转换)
 
 * **实现多态的两种形式**：
@@ -1509,9 +1509,27 @@ Alt+Insert
   2. ***使用父类作为方法返回值***
 
      ```java
-     public class Master{
-         public Pet getPet(String type){ //使用父类作为方法返回值
-             //......
+     // Person.java
+     public class Person{
+         public Pet getPet(int type){  // 使用父类作为方法返回值
+             if(type==1){
+                 return new Dog();
+             }else if (type==2){
+                 return new Cat();
+             }else {
+                 return new Penguin();
+             }
+         }
+         
+         public static void main(String[] args){
+             Pet pet = p.buyPet(1); // 父类引用指向子类对象
+             if(pet instanceof Dog){
+                 System.out.println("买的是一只狗");
+             }else if(pet instanceof Cat){
+                 System.out.println("买的是一只猫");
+             }else {
+                 System.out.println("买的是一只企鹅");
+             }
          }
      }
      ```
