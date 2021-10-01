@@ -483,7 +483,7 @@ zhangsan
 ### static 修饰成员变量
 
 - 在类中，用static声明的**成员变量**为**静态成员变量** ,又称为 **类属性**，**类变量**。
-  - 它为该类的公用变量，归属于类，被该类的所有实例（对象）共享，在类被载入时被显式初始化，
+  - 它为该类的公用变量，**归属于该类**，被该类的所有实例（对象）共享，在类被载入时被显式初始化，
   - 对于该类的所有对象来说，static成员变量只有一份。被该类的所有对象共享！！
   - 可以使用**”对象.类属性”**来调用。不过，一般都是用**“类名.类属性”** 来调用
   - static变量置于方法区中！
@@ -1752,3 +1752,105 @@ java中的接口具备广泛的使用：
 <br>
 
 ## 内部类
+
+把一个类定义在另一个类的内部称为**内部类**
+
+（一个java文件中可以包含多个class，但是只能有一个public class。如果一个类定义在另一个类的内部，此时可以称之为内部类）<br>
+
+（可以把内部类当作类中的一个普通成员变量，只不过此成员变量是class的类型）<br>
+
+### 使用
+
+* 创建内部类的时候，跟之前的方法不一样，需要在内部类的前面添加外部类来进行修饰
+
+  - OuterClass.InnerClass inner = new OuterClass().new InnerClass();
+
+  - 或：
+
+    外部类 外部类对象=new 外部类();<br>
+
+    外部类.内部类 内部类对象=外部类对象.new 内部类 ();
+
+### 特点
+
+1.  内部类可以方便的访问外部类的私有属性
+
+   ```java
+   // Outer.java
+   package Practice4_2;
+   class Outer{
+       private String info="hello World";//声明私有属性
+       class Inner{
+           public void print(){     //打印输出的方法
+               System.out.println(info); //内部类可以访问外部类的私有属性
+           }
+       }
+   }
+   
+   // Test.java
+   package Practice4_2;
+   public class Test{
+       public static void main(String [] args){
+           new Outer().new Inner().print();//调用Inner的方法获取Outer的私有属性
+       }
+   }
+   ```
+
+2. 外部类不能访问内部类的私有属性。但是如果创建了内部类的对象，此时可以在外部类中访问私有属性
+
+3. 内部类中不能定义静态属性
+
+4. 如果外部类和内部类具有相同的成员变量或方法，内部类默认访问自己的成员变量或方法，如果要访问外部类的成员变量，需使用this关键字。（外部类类名.this.属性）
+
+   ```java
+   // Outer.java
+   package Practice4_2;
+   public class Outer {
+       private String name="外部类";
+       class Inner{
+           private String name = "内部类";
+           public void show(){
+               System.out.println(name);
+               System.out.println(this.name);
+               System.out.println(Outer.this.name);// 这样调用外部类的属性
+           }
+       }
+   }
+   
+   // Test.java
+   package Practice4_2;
+   public class Test {
+       public static void main(String[] args) {
+           Outer.Inner inner = new Outer().new Inner();
+           inner.show();
+       }
+   }
+   ```
+
+### 分类
+
+- #### 匿名内部类：
+
+  当定义了一个类，实现了某个接口的时候，在使用过程中只需要使用一次，没有其他用途。此时考虑到代码编写的简洁，可以考虑不创建具体的类，而采用new Interface(){添加未实现的方法}，就叫做匿名内部类。看上去像new了一个接口，实际上是new SomeClass implements Interface()的简洁。
+
+  ```java
+  /* someMethod(new Interface(){}) 
+  or new Class(new Interface(){}) */
+  someMethod(new someInterface(){
+      @Override
+      // ...(your interface methods here)
+  });
+  ```
+
+- #### 静态内部类：
+
+  在内部类中可以定义静态内部类，使用static关键字进行修饰，使用规则<br>
+              外部类.内部类 类的引用名称 = new 外部类.内部类（）；
+
+  
+
+- #### 方法内部类：
+
+  在外部类的方法中也可以定义类，此时叫做方法内部类（了解即可）
+                  使用的时候需要注意，只能在方法中创建对象，因为此class的作用域就是当前方法
+
