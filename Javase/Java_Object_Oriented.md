@@ -1848,8 +1848,38 @@ java中的接口具备广泛的使用：
 
   - 外部类.内部类 类的引用名称 = new 外部类.内部类（）；
 
+  ```java
+  //StaticClass.java
+  public class StaticClass {
+      private int id;
+      public void test(){
+          System.out.println("test");
+      }
+      static class InnerClass{
+          private String name;
+          public void show(){
+              System.out.println("show innerclass");
+          }
+      }
+  }
+  
+  //Test.java
+  public class Test {
+      public static void main(String[] args) {
+          StaticClass.InnerClass innerClass = new StaticClass.InnerClass();//调用方法
+  //        StaticClass.InnerClass innerClass = new StaticClass().new InnerClass();
+          innerClass.show();
+      }
+  }
+  ```
+
 - #### 方法内部类：
 
-  在外部类的方法中也可以定义类，此时叫做方法内部类（了解即可）
-                  使用的时候需要注意，只能在方法中创建对象，因为此class的作用域就是当前方法
+  在外部类的方法中也可以定义类，此时叫做方法内部类（很少用，了解即可）<br>
+
+  使用的时候需要注意，只能在方法中创建该方法内部类的对象，因为此class的作用域就是当前方法<br>
+
+  注意事项：方法内部类不能在外部类的方法以外的地方使用，所以方法内部类不能使用访问控制符和static修饰符
+
+  
 
