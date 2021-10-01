@@ -19,17 +19,15 @@ Java编程语言使用异常处理机制为程序提供了错误处理的能力�
 
 程序中预先设置好对付异常的处理办法 —> 程序运行 —> 异常 —> 对异常进行处理 —> 处理完毕，程序继续运行
 
-### 异常处理的方式
+**异常处理的方式**：
 
 Java的异常处理是通过5个关键字来实现的：try、catch、finally、throw、throws
 
 ![image-20211001230616397](../image/image-20211001230616397.png)
 
-#### 1、捕获异常
+### 1、捕获异常
 
 try {代码逻辑} catch(Exception e) {异常处理逻辑}
-
-try {代码逻辑} catch(具体的异常Exception e) {异常处理逻辑} catch(具体的异常)：
 
 ```java
 public class TestException {
@@ -53,26 +51,65 @@ public class TestException {
 }
 ```
 
- - ##### 执行过程中可能存在的情况：
+try {代码逻辑} catch(具体的异常 e) {异常处理逻辑} catch(具体的异常 e)：(推荐)
 
-   1. 正常执行，只执行try中的代码
+```java
+public class TestException {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        try {
+            System.out.print("请输入被除数:");
+            int num1 = in.nextInt();
+            System.out.print("请输入除数:");
+            int num2 = in.nextInt();
+            System.out.println(String.format("%d / %d = %d",
+                    num1, num2, num1 / num2));
+        }catch(ArithmeticException e){
+            System.out.println("数学异常，除数不能是0");
+            e.printStackTrace();
+        }catch (InputMismatchException e){
+            System.out.println("输入的参数值类型不匹配");
+            e.printStackTrace();
+        }catch (NullPointerException e){
+            System.out.println("空指针异常");
+            e.printStackTrace();
+        }
+        System.out.println("感谢使用本程序！");
+    }
+}
+```
 
-   2. 遇到异常情况，会处理try中异常代码之前的逻辑，后面的逻辑不会执行，最后会执行catch中的代码
+ - #### 执行过程中可能存在的情况：
+
+   1. **正常执行。**只执行try中的代码
+
+   2. **遇到异常情况。**会处理try中异常代码之前的逻辑，后面的逻辑不会执行，最后会执行catch中的代码
 
       ![image-20211001232051048](../image/image-20211001232051048.png)
 
-      - （常用）catch(Exception e){} 里面写入：**e.printStackTrace()**;  堆栈跟踪功能显示出程序运行到当前类的执行流程
-      - （少用）catch(Exception e){} 里面写入：System.out.println(**e.getMessage()**);。
-      - 
+      - （常用）catch(Exception e){} 里面写入：**e.printStackTrace()**;  输出异常的堆栈信息。堆栈跟踪功能显示出程序运行到当前类的执行流程
+      - （少用）catch(Exception e){} 里面写入：System.out.println(**e.getMessage()**);。返回异常信息描述字符串，是printStackTrace()输出信息的一部分
+      - （推荐）多写几个catch去捕获具体异常
 
-   3. 使用多重catch的时候，会遇到异常子类不匹配的情况，此时依然会报错，因此建议在catch的最后将所有的异常的父类写上
+   3. **异常类型不匹配。**使用多重catch的时候，会遇到异常子类不匹配的情况，此时依然会报错，因此建议在catch的最后将所有的异常的父类写上。可以针对每一种具体的异常做相应的更丰富的处理
 
+      ![image-20211001235125527](../image/image-20211001235125527.png)
 
+- #### 注意：
 
-可以针对每一种具体的异常做相应的更丰富的处理
+  - 当使用多重的catch的时候一定要注意相关异常的顺序，将子类放在最前面的catch，父类放在后面的catch。（Exception是ArithmeticException的父类）
 
-注意：当使用多重的catch的时候一定要注意相关异常的顺序，将子类放在最前面的catch，父类放在后面的catch
+ - #### 常见的异常类型
 
- *        InputMismatchException 输入类型不匹配
- * ArithmeticException 算术运算异常
+   | 异 常 类 型                    | 说 明                                 |
+   | ------------------------------ | ------------------------------------- |
+   | Exception                      | 异常层次结构的父类                    |
+   | InputMismatchException         | 输入类型不匹配                        |
+   | ArithmeticException            | 算术错误情形，如以零作除数            |
+   | ArrayIndexOutOfBoundsException | 数组下标越界                          |
+   | NullPointerException           | 尝试访问 null 对象成员                |
+   | ClassNotFoundException         | 不能加载所需的类                      |
+   | IllegalArgumentException       | 方法接收到非法参数                    |
+   | ClassCastException             | 对象强制类型转换出错                  |
+   | NumberFormatException          | 数字格式转换异常，如把"abc"转换成数字 |
 

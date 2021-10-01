@@ -158,6 +158,7 @@ java是一种强类型语言：变量在定义时必须声明其类型
 - 除布尔型外，所有基本数据类型因为各自精度不同，赋值时都要考虑这个问题
 - 自动转换会自动将小的类型转换为大的类型
 - 强制转换：前面加上(datatype)
+- String to int:   int number = Integer.parseInt(str);
 
 <br>
 
