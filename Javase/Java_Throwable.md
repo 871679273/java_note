@@ -113,7 +113,7 @@ public class TestException {
    | ClassCastException             | 对象强制类型转换出错                  |
    | NumberFormatException          | 数字格式转换异常，如把"abc"转换成数字 |
 
-### 2、finally
+#### finally
 
 在程序运行过程中，如果处理异常的部分包含finally的处理，那么无论代码是否发生异常，finally中的代码总会执行
 *   finally包含哪些处理逻辑（过程）？
@@ -273,6 +273,7 @@ finally
 
 - 总结（面试点）：
   	 try语句在返回前，将其他所有的操作执行完，保留好要返回的值，而后转入执行finally中的语句，而后分为以下三种情况：
+
   - 情况一：如果finally中有return语句，则会将try中的return语句”覆盖“掉，直接执行finally中的return语句，得到返回值，这样便无法得到try之前保留好的返回值。
 
   - 情况二：如果finally中没有return语句，也没有改变要返回值，则执行完finally中的语句后，会接着执行try中的return语句，返回之前保留的值。
@@ -282,4 +283,27 @@ finally
     - 1）如果return的数据是基本数据类型或文本字符串，则在finally中对该基本数据的改变不起作用，try中的return语句依然会返回进入finally块之前保留的值。
 
     - 2）如果return的数据是引用数据类型，而在finally中对该引用数据类型的属性值的改变起作用，try中的return语句返回的就是在finally中改变后的该属性的值。
+
+### 2、声明异常
+
+throws:声明异常，抛出异常
+
+在异常情况出现的时候，可以使用try...catch...finally的方式对异常进行处理，但除此之外，可以将异常向外抛出，由外部的进行处理
+
+* 1、在方法调用过程中，可以存在N多个方法之间的相互调用，此时假如每个方法中都包含了异常情况，那么就需要在每个方法中都进行try。。catch，另外一种比较简单的方式，就是在方法的最外层调用处理一次即可。使用throws的方法，对所有执行过程中的所有方法出现的异常进行统一集中处理。
+* 2、如何判断是使用throws还是使用try...catch..
+  * 最稳妥的方式是在每个方法中都进行异常的处理
+  * 偷懒的方式是判断在整个调用的过程中，外层的调用方法是否有对异常的处理，如果有，直接使用throws,如果没有，那么就要使用try...catch...
+
+```java
+public class Excepton2 {
+    public static void main(String[] args) throws Exception{ // throws Exception
+		test();
+        // System.out.println("不会被打印出来"); // 不会被打印出来
+    }
+    public static void test() throws Exception{ // throws Exception
+        System.out.println(1/0); // 报错
+    }
+}
+```
 
