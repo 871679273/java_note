@@ -297,11 +297,11 @@ throws:声明异常，抛出异常
 
 ```java
 public class Excepton2 {
-    public static void main(String[] args) throws Exception{ // throws Exception
+    public static void main(String[] args) throws Exception{ // throws Exception 扔到jvm
 		test();
         // System.out.println("不会被打印出来"); // 不会被打印出来
     }
-    public static void test() throws Exception{ // throws Exception
+    public static void test() throws Exception{ // throws Exception 扔到main
         System.out.println(1/0); // 报错
     }
 }
