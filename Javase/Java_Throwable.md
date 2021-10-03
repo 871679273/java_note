@@ -295,6 +295,8 @@ throws:声明异常，抛出异常
   * 最稳妥的方式是在每个方法中都进行异常的处理
   * 偷懒的方式是判断在整个调用的过程中，外层的调用方法是否有对异常的处理，如果有，直接使用throws,如果没有，那么就要使用try...catch...
 
+![image-20211003231220943](../image/image-20211003231220943.png)
+
 ```java
 public class Excepton2 {
     public static void main(String[] args) throws Exception{ // throws Exception 扔到jvm
