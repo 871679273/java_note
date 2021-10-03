@@ -313,5 +313,34 @@ public class Excepton2 {
 
 throw配合throws使用。
 
-如果：throw new Exception("性别出现错误"); 那么：e.printStackTrace();打印的就是 （"性别出现错误"）这一错误信息。
+- 如果：throw new Exception("性别出现错误"); 那么：e.printStackTrace();打印的就是 （"性别出现错误"）这一错误信息。
+
+- 四步使用：
+  1. throw
+  2. throws
+  3. catch
+  4. printStackTrace
+
+```java
+public class Excepton2 {
+    public static void main(String[] args) {
+        try {
+            show();
+        } catch (Exception e) { // 3.catch 
+            e.printStackTrace(); // 4.print
+        }
+        System.out.println("hehe");
+    }
+
+    public static void show() throws Exception{ // 2.throws
+        String gender = "1234";
+        if (gender.equals("man")){
+            System.out.println("man");
+        }else if(gender.equals("woman")){
+            System.out.println("woman");
+        }else{
+            throw new Exception("性别出现错误"); // 1.throw
+        }
+    }
+```
 
