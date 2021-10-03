@@ -1,7 +1,7 @@
 - [x] 3.9-Object，多态 1
 - [x] 4.1-接口 2
 - [x] 4.2-内部类、异常简单介绍 3 （10-2）
-- [ ] 4.3-java异常及常用类-包装类、String 4
+- [x] 4.3-java异常及常用类-包装类、String 4
 - [ ] 5.1-java常用类、java集合框架 5
 - [ ] 5.2-Java集合框架-ArrayList、LinkedList等 6
 - [ ] 5.3-Java集合框架-HashSet、TreeSet 7
