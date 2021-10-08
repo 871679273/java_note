@@ -19,6 +19,8 @@ public class GamePanel extends JPanel {
     String direction;
     int foodX;
     int foodY;
+    int score;
+    boolean isDead = false;
     // 加入定时器
     Timer timer;
 
@@ -39,6 +41,10 @@ public class GamePanel extends JPanel {
         //初始化第一节身子坐标
         snakeX[2]=125;
         snakeY[2]=275;
+        //初始化食物坐标
+        foodX=300;
+        foodY=200;
+        score=0;
     }
     public GamePanel(){
         init();
@@ -50,8 +56,13 @@ public class GamePanel extends JPanel {
                 int keyCode = e.getKeyCode();
                 System.out.println(keyCode);
                 if(keyCode==KeyEvent.VK_SPACE){
-                    isStart =! isStart;
-                    repaint();
+                    if(isDead){
+                        isDead =! isDead;
+                        init();
+                    }else{
+                        isStart =! isStart;
+                        repaint();
+                    }
                 }
                 if(keyCode == KeyEvent.VK_UP){
                     direction = "U";
@@ -70,7 +81,7 @@ public class GamePanel extends JPanel {
         timer = new Timer(100, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(isStart){
+                if(isStart&&(isDead==false)){
                     for(int i=length-1;i>0;i--){
                         snakeX[i] = snakeX[i-1];
                         snakeY[i] = snakeY[i-1];
@@ -102,8 +113,16 @@ public class GamePanel extends JPanel {
                     if(snakeX[0]==foodX&&snakeY[0]==foodY){
                         length++;
                         //随机生成新坐标
-                        foodX = ((int)Math.random()*30+1)*25;//[25,750]
+                        foodX = ((int)((Math.random())*30)+1)*25;//[25,750]
                         foodY = (new Random().nextInt(26)+4)*25;//[100,725]
+                        score+=10;
+                    }
+                    //死亡判定
+                    for(int i =1;i<length;i++){
+                        if((snakeX[0]==snakeX[i]) && (snakeY[0]==snakeY[i])){
+                            //将死亡状态改为true
+                            isDead=true;
+                        }
                     }
                     repaint();
                 }
@@ -152,5 +171,14 @@ public class GamePanel extends JPanel {
         }
         //画食物
         Images.foodImg.paintIcon(this,g,foodX,foodY);
+        g.setColor(new Color(255, 255, 255));
+        g.setFont(new Font("微软雅黑",Font.BOLD,20));
+        g.drawString("Score:"+score,620,40);
+        //死亡状态
+        if(isDead==true){
+            g.setColor(new Color(255, 255, 255));
+            g.setFont(new Font("微软雅黑",Font.BOLD,20));
+            g.drawString("Game Over",250,330);
+        }
     }
 }
