@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<link rel="stylesheet" type="text/css" href="file:///D:/soft_setup/nyfedit7pro/scripts/highlight.styles/default.css" />
+		<style>
+			body, table{font-family: 微软雅黑; font-size: 18pt}
+			
+			table{border-collapse: collapse; border: 1px solid gray; border-width: 2px 1px 2px 1px;}
+			th{border: 1px solid gray; padding: 4px; background-color: #ddd;}
+			td{border: 1px solid gray; padding: 4px;}
+			tr:nth-child(2n){background-color: #f8f8f8;}
+			pre{border: 2px solid #d6d6d6; padding: 0px; border-radius: 3px;}
+		</style>
+	</head>
+	<body>
+		<div>
+			<div><br />
+			</div>
+			<pre>
+<code id="ID_17319FB0BE6" class="hljs scala"><ol><li><span class="hljs-keyword">package</span> com.msb.test01;</li><li></li><li><span class="hljs-keyword">import</span> javax.swing.*;</li><li><span class="hljs-keyword">import</span> java.awt.*;</li><li></li><li><span class="hljs-comment">/**</span></li><li> * @author : msb-zhaoss</li><li> * GamePanel本身不是一个面板</li><li> * 但是需要继承一个类：JPanel</li><li> * 那么GamePanel就具备面板的能力了</li><li> */</li><li>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GamePanel</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">JPanel</span> </span>{</li><li>    <span class="hljs-comment">/*</span></li><li>    paintComponent这个方法 就类似 我们平时写的main方法</li><li>    它能做的事就是 ：底层也会直接调用，只要你写了这个方法，当需要画图的时候</li><li>    底层就去自动调用这个方法</li><li>    所以你想要画的东西，都要写在这个方法中</li><li>     */</li><li>    <span class="hljs-meta">@Override</span></li><li>    <span class="hljs-keyword">protected</span> void paintComponent(<span class="hljs-type">Graphics</span> g) {</li><li>        <span class="hljs-keyword">super</span>.paintComponent(g);</li><li>        <span class="hljs-comment">//先将面板的背景颜色画上：</span></li><li>        <span class="hljs-keyword">this</span>.setBackground(<span class="hljs-keyword">new</span> <span class="hljs-type">Color</span>(<span class="hljs-number">174</span>, <span class="hljs-number">207</span>, <span class="hljs-number">174</span>));</li><li>        <span class="hljs-comment">//画一个图片：</span></li><li>        <span class="hljs-comment">/*</span></li><li>        四个参数：this指代当前面板   g利用画笔   x,y指的就是举例 面板左上角的坐标</li><li>         */</li><li>        <span class="hljs-type">Images</span>.headerImg.paintIcon(<span class="hljs-keyword">this</span>,g,<span class="hljs-number">10</span>,<span class="hljs-number">10</span>);</li><li>        <span class="hljs-comment">//调节画笔的颜色：</span></li><li>        g.setColor(<span class="hljs-keyword">new</span> <span class="hljs-type">Color</span>(<span class="hljs-number">190</span>, <span class="hljs-number">179</span>, <span class="hljs-number">201</span>));</li><li>        <span class="hljs-comment">//画一个矩形：</span></li><li>        <span class="hljs-comment">/*</span></li><li>        四个参数：x,y  设置坐标   后面两个参数：设置矩形的宽和高</li><li>         */</li><li>        g.fillRect(<span class="hljs-number">10</span>,<span class="hljs-number">70</span>,<span class="hljs-number">770</span>,<span class="hljs-number">685</span>);</li><li></li><li>    }</li><li>}</li><li></li></ol></code></pre>
+			<div>在窗体中加入面板：
+			</div>
+		</div>
+		<div>
+			<div><br />
+			</div>
+			<pre>
+<code id="ID_17319FB6199" class="hljs processing"><ol><li><span class="hljs-keyword">package</span> com.msb.test01;</li><li></li><li><span class="hljs-keyword">import</span> javax.swing.*;</li><li><span class="hljs-keyword">import</span> java.awt.*;</li><li></li><li><span class="hljs-comment">/**</span></li><li> * @author : msb-zhaoss</li><li> */</li><li><span class="hljs-keyword">public</span> class StartGame {</li><li>    <span class="hljs-comment">//这是一个main方法，是程序的入口：</span></li><li>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> main(<span class="hljs-keyword">String</span>[] args) {</li><li>        <span class="hljs-comment">//创建一个窗体</span></li><li>        JFrame jf = <span class="hljs-keyword">new</span> JFrame();</li><li></li><li>        <span class="hljs-comment">//给窗体加一个标题</span></li><li>        jf.setTitle(<span class="hljs-string">"贪吃蛇小游戏by珊珊"</span>);</li><li>        <span class="hljs-comment">//获取屏幕的宽</span></li><li>        <span class="hljs-built_in">int</span> <span class="hljs-built_in">width</span> = Toolkit.getDefaultToolkit().getScreenSize().<span class="hljs-built_in">width</span>;</li><li>        <span class="hljs-comment">//获取屏幕的高：</span></li><li>        <span class="hljs-built_in">int</span> <span class="hljs-built_in">height</span> = Toolkit.getDefaultToolkit().getScreenSize().<span class="hljs-built_in">height</span>;</li><li>        <span class="hljs-comment">//设置窗体的位置：</span></li><li>        jf.setBounds((<span class="hljs-built_in">width</span><span class="hljs-number">-800</span>)/<span class="hljs-number">2</span>,(<span class="hljs-built_in">height</span><span class="hljs-number">-800</span>)/<span class="hljs-number">2</span>,<span class="hljs-number">800</span>,<span class="hljs-number">800</span>);</li><li>        <span class="hljs-comment">//在关闭窗体的时候 程序也要停止：</span></li><li>        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</li><li>        <span class="hljs-comment">//进行设置，让窗体的大小不可变：</span></li><li>        jf.setResizable(<span class="hljs-keyword">false</span>);</li><li>        <span class="hljs-comment">//创建一个面板：</span></li><li>        GamePanel gp = <span class="hljs-keyword">new</span> GamePanel();</li><li>        <span class="hljs-comment">//将面板放入窗体中：</span></li><li>        jf.<span class="hljs-built_in">add</span>(gp);</li><li>        <span class="hljs-comment">//将窗体展现出来：---&gt;必须放在最后</span></li><li>        jf.setVisible(<span class="hljs-keyword">true</span>);</li><li>    }</li><li>}</li><li></li></ol></code></pre>
+			<div><br />
+			</div>
+		</div>
+	</body>
+</html>
