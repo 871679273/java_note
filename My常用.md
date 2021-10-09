@@ -44,3 +44,18 @@ for(int num:balls){
 }
 ```
 
+### equals
+
+```java
+"猫".equals(petName) //与petName.equals("猫")相比，可以防止空指针异常。petName可能是空的。
+```
+
+### 转义符
+
+```java
+// 换行
+\n
+// tab
+\t
+```
+
