@@ -463,6 +463,12 @@ class B extends A{
 - package语句必须得是第一条语句
 - package zhangsan.lisi 表示：把该文件中所有的类放入zhangsan.lisi这个包中，并且该文件中所有的类真正的名字将是包名和类名的组合
 - 如：类TestPackage的名字将变成是zhangsan.lisi.TestPackage,而不再是TestPacka
-
 - 编译时建议使用：javac -d . TestPakage.java  而不使用 javac TestPackage.java。因为后者要自己手动建立包目录
 - 如果不在当前路径下运行程序，则必须保证class文件的最上层目录的父目录位于classpath下
+- 先检测当前目录下是否有zhangsan/lisi这个包（包即文件夹），如果有，再检测该包下是否有zhangsan.lisi.TestPackage这个类，如果没有，编译器将再去classpath设置的路径中依次查找。如果都查找失败，则运行时出错
+- 在同一个包中只有私有的不能被另一个类访问，也只有私有的不能被继承
+
+### 不同包之间的相互访问
+
+- 在不同包没有任何关系的两个类，只有public类和public成员才可以被另一个类访问 
+
