@@ -470,5 +470,45 @@ class B extends A{
 
 ### 不同包之间的相互访问
 
-- 在不同包没有任何关系的两个类，只有public类和public成员才可以被另一个类访问 
+- 在不同包没有任何关系的两个类，只有public类和public成员才可以被另一个包中的类访问 
+
+```java
+package com.ruide;
+//import zhangsan.lisi.*;
+import zhangsan.lisi.A;
+
+class B{
+    public static void main(String[] args){
+        //zhangsan.lisi.A aa = new zhangsan.lisi.A();
+        A aa = new A();
+        aa.f();
+    }
+}
+```
+
+- 非内部类，只能写public或不写访问修饰符
+- package语句必须排第一，import语句在它之下
+- protected的方法可以被另一个包中的类继承过来，但只能在该类内部用，不能在外面用。public都可以。
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+# 异常
+
+- 处理异常，程序仍能执行
+- 出错时，若没处理，抛给上一层，直到mian，然后抛给jvm，jvm会结束程序。
+- 异常是个对象
+
+```java
+try{
+    
+}catch(Exception e){
+    e.printStackTrace();
+}
+```
 
