@@ -514,10 +514,31 @@ try{
     
 }catch(Exception e){
     e.printStackTrace();
+}finnally{
+    
 }
 ```
 
 - java认为放在try里面的语句很可能执行不成功。
+
 - scanner接受输入时，无法使用ifelse处理。所以必须用trycatch异常。
 
 - throw和throws（抛给上一层）
+
+- 无论是否抛出异常，都执行finally
+
+- ```java
+  class A{
+      //声明里面有这个错误没处理可能会抛出
+  	int diveide(int a ,int b) throws DivisorIsZeroException{
+          if(0 == b){
+              throw new DivisorIsZsroException("除数不能为0"); //抛出异常
+          }
+          int m = a/b;
+          return m;
+      }
+          
+  }
+  ```
+
+  
