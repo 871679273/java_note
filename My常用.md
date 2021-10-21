@@ -42,6 +42,7 @@ switch (choice){
 for(int num:balls){
     System.out.print(num+"\t"); //不换行
 }
+//balls可以是数组
 ```
 
 ### equals
@@ -57,5 +58,21 @@ for(int num:balls){
 \n
 // tab
 \t
+```
+
+### Arrays类静态方法
+
+```java
+//实现对数组的排序
+Arrays.sort(data)
+//将数组中的内容全部打印出来
+Arrays.toString(); 
+//比较数组元素是否相等
+Arrays.equals();
+//二分查找法找指定元素的索引值（下标）
+Arrays.binarySearch(); 
+//截取数组
+Arrays.copeOf(arr,num) 
+Arrays.copeOfRange(arr,rangeL,rangeR);
 ```
 

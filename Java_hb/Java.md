@@ -500,6 +500,7 @@ class B{
 
 # 异常
 
+- 48~55
 - 处理机制：
   1. 当java程序运行时出现问题时，系统会自动检测到该错误，并立即生成一个与该错误对应的异常对象
   2. 然后把该异常对象提交给java虚拟机
@@ -523,7 +524,7 @@ try{
 
 - scanner接受输入时，无法使用ifelse处理。所以必须用trycatch异常。
 
-- throw和throws（抛给上一层）
+- throw和throws（throws是一种声明，意味着里面可能出现某种异常，但不处理，会抛出给调用者处理，throw用来抛出）（但如果throws的异常是runtime异常，那可以不catch。如果不是，则需要trycatch）
 
 - 无论是否抛出异常，都执行finally
 
@@ -542,3 +543,63 @@ try{
   ```
 
   
+
+![幻灯片21](./images/幻灯片21.JPG)
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+# toString
+
+- 所有类继承自Object,object有toString()方法。所有对象都可以调用该方法。返回的是地址。重写toString（）可以用来输出其他东西。
+- 调用方法：
+  - print该对象
+  - aa.toString()会return
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+# String和StringBuffer
+
+- 56~61
+- String.valuesOf() 返回某个数的字符串形式
+
+- StringBuffer
+  - String类对象一旦创建就不可更改
+  - 如果经常对字符串内容进行修改，则使用StringBuffer
+  - 如果经常对字符串内容进行修改而使用String的话，就会导致即耗空间又耗时间
+  - StringBuffer对象的内容是可以改变的，因此String类中没有修改字符串的方法，但是StringBuffer类中却有大量修改字符串的方法
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+# 数组
+
+# 线程
+
+- 67以后
+- 阻塞，就绪
+- extends Thread, run(), .start()
+- implements Runnable, run(), A aa = new A(); Thread th1 = new Thread(aa);
+- run(){while(flag){...}};
+- public void shutDown(){this.flag = false;}
+
+- 线程优先级，线程休眠，线程的让步，线程的串行化
+- 线程的同步
+- synchronized
+
