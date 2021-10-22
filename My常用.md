@@ -60,7 +60,11 @@ for(int num:balls){
 \t
 ```
 
-### Arrays类静态方法
+### 数组
+
+#### Arrays类静态方法
+
+实现对数组的操作
 
 ```java
 //实现对数组的排序
@@ -74,5 +78,14 @@ Arrays.binarySearch();
 //截取数组
 Arrays.copeOf(arr,num) 
 Arrays.copeOfRange(arr,rangeL,rangeR);
+```
+
+### length
+
+```java
+//获取数组长度
+arr.length //属性
+//获取string长度
+str.length() //方法
 ```
 
