@@ -896,3 +896,64 @@ public class TestPC
 
 # 流stream/IO
 
+- 四大基本抽象流：字节流：InputStream/OutputStream，字符流：Reader/Writer
+
+- 文件流
+
+  - ```java
+    //FileReader实现简单文件阅读
+    import java.io.*;
+    
+    public class TestIO
+    {
+    	public static void main(String[] args) throws Exception
+    	{
+    		FileReader fr = new FileReader("D:/share/S5/di-20 流/TestIO.java");
+    		int ch;
+    		int cnt = 0;
+    		
+    		ch = fr.read();
+    		while (-1 != ch)
+    		{
+    			++cnt;
+    			System.out.printf("%c", (char)ch);
+    			ch = fr.read();
+    		}
+    		System.out.printf("该文件字符的个数是:%d\n", cnt);
+    		fr.close();
+    	}
+    }
+    ```
+
+  - 对文本，用字符流的速度更快，也不会乱码。但字符流只能读取文本信息，而字节流可以读任何信息（图片，歌曲等）
+
+  - fw.flush(); FileWriter的fulsh方法，刷新缓存区中数据（因为硬盘每次存数据都要启动磁头，这个速度太慢，所以先会写进缓存区，再一次性写，速度快，也是保护硬盘）。标准写法，必须写。
+
+  - ```java
+    //FileReader和FileWriter实现读写（复制）
+    import java.io.*;
+    
+    public class TestFileReaderWriterCopy
+    {
+    	public static void main(String[] args) throws Exception
+    	{
+    		FileReader fr = new FileReader("D:\\share\\S5\\di-20 流\\TestFileReaderWriterCopy.java");
+    		FileWriter fw = new FileWriter("d:/zhangsan.haha");
+    		int ch;
+    		
+    		ch = fr.read();
+    		while (-1 != ch)
+    		{
+    			fw.write(ch);
+    			ch = fr.read();
+    		}		
+    		fw.flush();
+    		
+    		fr.close();
+    		fw.close();
+    	}
+    }
+    ```
+
+    
+
