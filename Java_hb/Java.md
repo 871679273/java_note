@@ -955,5 +955,94 @@ public class TestPC
     }
     ```
 
+- 缓冲流
+
+  - 属于处理流（包裹流），运行速度会更快
+
+  - ```java
+    import java.io.*;
     
+    public class TestInputStreamOutputStreamCopy_3
+    {
+    	public static void main(String[] args) throws Exception
+    	{
+    		BufferedInputStream bis = new BufferedInputStream( new FileInputStream("E:\\IBM教学\\java\\lesson_io\\妹妹来看我.mp3"));
+    		BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("d:/zhangsan.haha"));
+    		byte[] buf = new byte[1024];
+    		int len;
+    		
+    		len = bis.read(buf);
+    		while (-1 != len)
+    		{
+    			bos.write(buf, 0, len);
+    			len = bis.read(buf);
+    		}		
+    		bos.flush();
+    		
+    		bos.close();
+    		bis.close();
+    	}
+    }
+    ```
+
+  - ```java
+    /*
+    	利用 BufferedReader 和 BufferedWriter 完成文本文件的复制
+    */
+    
+    import java.io.*;
+    
+    public class TestBufferedReaderWriterCopy
+    {
+    	public static void main(String[] args)
+    	{
+    		BufferedReader br = null;
+    		BufferedWriter bw = null;
+    		
+    		try
+    		{
+    			br = new BufferedReader(
+    						new FileReader("D:\\share\\S5\\di-20 流\\TestBufferedReaderWriterCopy.java")
+    					);
+    			bw = new BufferedWriter(
+    						new FileWriter("d:/share/Writer.txt")
+    					);
+    			String str = null;
+    			
+    			while (null != (str=br.readLine()))  //br.readLine()读取一行字符，但会将读取的换行符自动丢弃,即返回的String对象中并不包括换行符
+    			{
+    				bw.write(str);
+    				bw.newLine();  //写入一个换行符  这行不能省
+    			}
+    			bw.flush();
+    		}
+    		catch (FileNotFoundException e)
+    		{
+    			e.printStackTrace();
+    			System.exit(-1);
+    		}
+    		catch (IOException e)
+    		{
+    			e.printStackTrace();
+    			System.exit(-1);
+    		}
+    		finally
+    		{
+    			try
+    			{
+    				bw.close();
+    				br.close();
+    			}
+    			catch (IOException e)
+    			{
+    				e.printStackTrace();
+    				System.exit(-1);
+    			}
+    		}
+    	}
+    }
+    ```
+
+- 数据流
+  - 
 
