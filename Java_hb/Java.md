@@ -560,6 +560,7 @@ try{
 - 调用方法：
   - print该对象
   - aa.toString()会return
+- println（aa）等于aa.toString()
 
 <br>
 
@@ -1290,4 +1291,69 @@ public class TestPC
   }
   ```
 
-  
+# 容器
+
+- 容器存的都是对象
+- ArrayList,LinkedList... list（列表）
+- 集set,列表list,映射map
+- ArrayList底层采用数组，LinkedList是双向链表。ArrayList存取速度快，插入删除慢，LinkedList存取速度慢，插入速度快。
+- Collections类和常用静态方法：sort,shuffle,reverse,fill,copy,binarySearch
+
+- comparable接口：
+
+  - compareTo(Object o) 规定对象间的比较规则
+
+  - ```java
+    import java.util.*;
+    
+    class Student implements Comparable
+    {
+    	private int id;
+    	private String name;
+    	
+    	public Student(int id, String name)
+    	{
+    		this.id = id;
+    		this.name = name;
+    	}
+    	
+    	@Override
+    	public String toString()
+    	{
+    		return id + "  " + name;  //1000张三   
+    		//System.out.println();
+    	}	
+    	
+    	@Override
+    	public int compareTo(Object o)
+    	{
+    		Student st = (Student)o;
+    		
+    		if (this.id == st.id)
+    			return 0;
+    		else if (this.id > st.id)
+    			return 1;
+    		else
+    			return -1;		
+    	}
+    }
+    
+    public class TestList
+    {
+    	public static void main(String[] args)
+    	{
+    		List L = new ArrayList();
+    		L.add(new Student(1000, "张三"));
+    		L.add(new Student(1003, "小娟"));
+    		L.add(new Student(1002, "王五"));
+    		L.add(new Student(1001, "李四"));
+    
+    		
+    		Collections.sort(L);
+    		
+    		System.out.println(L);  //[
+    	}
+    }
+    ```
+
+    
