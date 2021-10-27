@@ -898,151 +898,396 @@ public class TestPC
 
 - 四大基本抽象流：字节流：InputStream/OutputStream，字符流：Reader/Writer
 
-- 文件流
+### 文件流
 
-  - ```java
-    //FileReader实现简单文件阅读
-    import java.io.*;
-    
-    public class TestIO
-    {
-    	public static void main(String[] args) throws Exception
-    	{
-    		FileReader fr = new FileReader("D:/share/S5/di-20 流/TestIO.java");
-    		int ch;
-    		int cnt = 0;
-    		
-    		ch = fr.read();
-    		while (-1 != ch)
-    		{
-    			++cnt;
-    			System.out.printf("%c", (char)ch);
-    			ch = fr.read();
-    		}
-    		System.out.printf("该文件字符的个数是:%d\n", cnt);
-    		fr.close();
-    	}
-    }
-    ```
+- ```java
+  //FileReader实现简单文件阅读
+  import java.io.*;
+  
+  public class TestIO
+  {
+  	public static void main(String[] args) throws Exception
+  	{
+  		FileReader fr = new FileReader("D:/share/S5/di-20 流/TestIO.java");
+  		int ch;
+  		int cnt = 0;
+  		
+  		ch = fr.read();
+  		while (-1 != ch)
+  		{
+  			++cnt;
+  			System.out.printf("%c", (char)ch);
+  			ch = fr.read();
+  		}
+  		System.out.printf("该文件字符的个数是:%d\n", cnt);
+  		fr.close();
+  	}
+  }
+  ```
 
-  - 对文本，用字符流的速度更快，也不会乱码。但字符流只能读取文本信息，而字节流可以读任何信息（图片，歌曲等）
+- 对文本，用字符流的速度更快，也不会乱码。但字符流只能读取文本信息，而字节流可以读任何信息（图片，歌曲等）
 
-  - fw.flush(); FileWriter的fulsh方法，刷新缓存区中数据（因为硬盘每次存数据都要启动磁头，这个速度太慢，所以先会写进缓存区，再一次性写，速度快，也是保护硬盘）。标准写法，必须写。
+- fw.flush(); FileWriter的fulsh方法，刷新缓存区中数据（因为硬盘每次存数据都要启动磁头，这个速度太慢，所以先会写进缓存区，再一次性写，速度快，也是保护硬盘）。标准写法，必须写。
 
-  - ```java
-    //FileReader和FileWriter实现读写（复制）
-    import java.io.*;
-    
-    public class TestFileReaderWriterCopy
-    {
-    	public static void main(String[] args) throws Exception
-    	{
-    		FileReader fr = new FileReader("D:\\share\\S5\\di-20 流\\TestFileReaderWriterCopy.java");
-    		FileWriter fw = new FileWriter("d:/zhangsan.haha");
-    		int ch;
-    		
-    		ch = fr.read();
-    		while (-1 != ch)
-    		{
-    			fw.write(ch);
-    			ch = fr.read();
-    		}		
-    		fw.flush();
-    		
-    		fr.close();
-    		fw.close();
-    	}
-    }
-    ```
+- ```java
+  //FileReader和FileWriter实现读写（复制）
+  import java.io.*;
+  
+  public class TestFileReaderWriterCopy
+  {
+  	public static void main(String[] args) throws Exception
+  	{
+  		FileReader fr = new FileReader("D:\\share\\S5\\di-20 流\\TestFileReaderWriterCopy.java");
+  		FileWriter fw = new FileWriter("d:/zhangsan.haha");
+  		int ch;
+  		
+  		ch = fr.read();
+  		while (-1 != ch)
+  		{
+  			fw.write(ch);
+  			ch = fr.read();
+  		}		
+  		fw.flush();
+  		
+  		fr.close();
+  		fw.close();
+  	}
+  }
+  ```
 
-- 缓冲流
+### 缓冲流
 
-  - 属于处理流（包裹流），运行速度会更快
+- 属于处理流（包裹流），运行速度会更快
 
-  - ```java
-    import java.io.*;
-    
-    public class TestInputStreamOutputStreamCopy_3
-    {
-    	public static void main(String[] args) throws Exception
-    	{
-    		BufferedInputStream bis = new BufferedInputStream( new FileInputStream("E:\\IBM教学\\java\\lesson_io\\妹妹来看我.mp3"));
-    		BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("d:/zhangsan.haha"));
-    		byte[] buf = new byte[1024];
-    		int len;
-    		
-    		len = bis.read(buf);
-    		while (-1 != len)
-    		{
-    			bos.write(buf, 0, len);
-    			len = bis.read(buf);
-    		}		
-    		bos.flush();
-    		
-    		bos.close();
-    		bis.close();
-    	}
-    }
-    ```
+- ```java
+  import java.io.*;
+  
+  public class TestInputStreamOutputStreamCopy_3
+  {
+  	public static void main(String[] args) throws Exception
+  	{
+  		BufferedInputStream bis = new BufferedInputStream( new FileInputStream("E:\\IBM教学\\java\\lesson_io\\妹妹来看我.mp3"));
+  		BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("d:/zhangsan.haha"));
+  		byte[] buf = new byte[1024];
+  		int len;
+  		
+  		len = bis.read(buf);
+  		while (-1 != len)
+  		{
+  			bos.write(buf, 0, len);
+  			len = bis.read(buf);
+  		}		
+  		bos.flush();
+  		
+  		bos.close();
+  		bis.close();
+  	}
+  }
+  ```
 
-  - ```java
-    /*
-    	利用 BufferedReader 和 BufferedWriter 完成文本文件的复制
-    */
-    
-    import java.io.*;
-    
-    public class TestBufferedReaderWriterCopy
-    {
-    	public static void main(String[] args)
-    	{
-    		BufferedReader br = null;
-    		BufferedWriter bw = null;
-    		
-    		try
-    		{
-    			br = new BufferedReader(
-    						new FileReader("D:\\share\\S5\\di-20 流\\TestBufferedReaderWriterCopy.java")
-    					);
-    			bw = new BufferedWriter(
-    						new FileWriter("d:/share/Writer.txt")
-    					);
-    			String str = null;
-    			
-    			while (null != (str=br.readLine()))  //br.readLine()读取一行字符，但会将读取的换行符自动丢弃,即返回的String对象中并不包括换行符
-    			{
-    				bw.write(str);
-    				bw.newLine();  //写入一个换行符  这行不能省
-    			}
-    			bw.flush();
-    		}
-    		catch (FileNotFoundException e)
-    		{
-    			e.printStackTrace();
-    			System.exit(-1);
-    		}
-    		catch (IOException e)
-    		{
-    			e.printStackTrace();
-    			System.exit(-1);
-    		}
-    		finally
-    		{
-    			try
-    			{
-    				bw.close();
-    				br.close();
-    			}
-    			catch (IOException e)
-    			{
-    				e.printStackTrace();
-    				System.exit(-1);
-    			}
-    		}
-    	}
-    }
-    ```
+- ```java
+  /*
+  	利用 BufferedReader 和 BufferedWriter 完成文本文件的复制
+  */
+  
+  import java.io.*;
+  
+  public class TestBufferedReaderWriterCopy
+  {
+  	public static void main(String[] args)
+  	{
+  		BufferedReader br = null;
+  		BufferedWriter bw = null;
+  		
+  		try
+  		{
+  			br = new BufferedReader(
+  						new FileReader("D:\\share\\S5\\di-20 流\\TestBufferedReaderWriterCopy.java")
+  					);
+  			bw = new BufferedWriter(
+  						new FileWriter("d:/share/Writer.txt")
+  					);
+  			String str = null;
+  			
+  			while (null != (str=br.readLine()))  //br.readLine()读取一行字符，但会将读取的换行符自动丢弃,即返回的String对象中并不包括换行符
+  			{
+  				bw.write(str);
+  				bw.newLine();  //写入一个换行符  这行不能省
+  			}
+  			bw.flush();
+  		}
+  		catch (FileNotFoundException e)
+  		{
+  			e.printStackTrace();
+  			System.exit(-1);
+  		}
+  		catch (IOException e)
+  		{
+  			e.printStackTrace();
+  			System.exit(-1);
+  		}
+  		finally
+  		{
+  			try
+  			{
+  				bw.close();
+  				br.close();
+  			}
+  			catch (IOException e)
+  			{
+  				e.printStackTrace();
+  				System.exit(-1);
+  			}
+  		}
+  	}
+  }
+  ```
 
-- 数据流
-  - 
+### 数据流
 
+- ```java
+  /*
+  	功能：把一个long类型的数据写入byte数组中,然后再从byte数组中读取出
+  		  这个long类型的数据
+  		  
+  		  因为网络编程中经常要把数值型数据存入byte数组中然后打包成
+  		  DatagramPacket经过网络传输到目的机，目的机再从byte数组中
+  		  把原数值型数据还原回来
+  	
+  	目的: ByteArrayOutputStream   DataOutputStream  ByteInputStream DataInputStream 流的使用
+  		  记住: DataOutputStream流中的writeLong(long n)是把n变量在内存
+  		  		中的二进制代码写入该流所连接到的设备中
+  		  		
+  	注意：查API文档得知：
+  			构造  ByteArrayOutputStream 对象时不需要也不能指定缓冲数组，因为缓冲数组默认已经内置好了 		
+  		  	构造  ByteArrayInputStream 对象时必须的指定缓冲数组是谁！
+  */
+  
+  import java.io.*;
+  
+  public class TestByteArrayOutputStream1
+  {
+  	public static void main(String args[]) throws Exception
+  	{
+  		long n = 9876543210L;
+  		ByteArrayOutputStream baos = new ByteArrayOutputStream();  //9行  API:"public ByteArrayOutputStream(): 创建一个新的 byte 数组输出流。缓冲区的容量最初是 32 字节，如有必要可增加其大小。 "
+  									//9行代码一旦执行完毕，意味着两点: 1、在内存中生成了一个大小为32个字节的byte数组   2、有一根叫做baos的管道已链接到了该byte数组中，并且可以通过这个管道向该byte数组中写入数据
+  									//虽然此时可以通过baos向baos所连接到的在内存中分配好的byte数组中写入数据，但是ByteArrayOutputStream流并没有提供可以直接把long类型数据直接写入ByteArrayOutputStream流所连接到的byte数组中的方法, 简单说我们没法通过baos向baos所连接到的byte数组中写入long类型的数据, 查API文档可以发现: ByteArrayOutputStream流中并没有类似writeLong()这样的方法，但是DataOutputStream流中却有writeLong() writeFloat()等方法
+  		DataOutputStream dos = new DataOutputStream(baos);
+  		
+  		dos.writeLong(n);  //把n变量所代表的10000L在内存中的二进制代码写入dos所依附的baos管道所连接到的内存中的大小为32字节的byte数组中，由运行结果来看，这是二进制写入，既不是把10000L转化为字符'1' '0' '0' '0' '0'写入byte数组中，而是把10000L在内存中的总共8个字节的二进制代码写入byte数组中
+  		
+  		dos.flush();
+  		byte[] buf = baos.toByteArray();  //DataOutputStream 流中并没有toByteArray()方法，但是ByteArrayOutputStream 流中却有toByteArray()方法, 所以不可以把baos 改为dos，否则编译时会出错! ByteArrayOutputStream流中toByteArray()方法的含义，摘自API“创建一个新分配的 byte 数组。其大小是此输出流的当前大小，并且缓冲区的有效内容已复制到该数组中”
+  
+  		//利用ByteArrayInputStream 和 DataInputStream 可以从byte数组中得到原long类型的数值10000L
+  		ByteArrayInputStream bais = new ByteArrayInputStream(buf);
+  		DataInputStream dis = new DataInputStream(bais);
+  		long l = dis.readLong();
+  
+  		System.out.println("l = " + l);
+  		dos.close();
+  	}
+  }
+  /*
+  	在JDK 1.6中的运行结果是：
+  ----------------
+  l = 9876543210
+  ----------------
+  */
+  ```
+
+### 转换流
+
+- OutputStreamWriter/InputStreamReader
+
+- ```java
+  //读取键盘输入，输出字符串
+  import java.io.*;
+  
+  public class TestString
+  {
+  	public static void main(String[] args)
+  	{
+  		String str = null;
+  		try
+  		{
+  			BufferedReader br = new BufferedReader(new InputStreamReader(System.in) );
+  			str = br.readLine();
+  			System.out.println("str = " + str);
+  		}
+  		catch (Exception e)
+  		{
+  		}
+  		
+  	}
+  }
+  ```
+
+### print流
+
+- PrintStream输出字节/PrintWriter输出字符。  只有输出，没有输入
+
+- PrintWriter优点，但System.out用的是PrintStream
+
+  ```java
+  /*
+  	DataOutputStream 中的 writeXXX(data)方法
+  		与
+  	PrintStream 中的 println(data)的区别
+  	
+  	总结:
+  		DataOutputStream 中的 writeXXX(data)方法是把data在内存中的二进制数据写入文件
+  		PrintStream 中的 println(data)写出的是该数据的格式化后的字符串		
+  */
+  
+  import java.io.*;
+  
+  public class TestPrintStream_1
+  {
+  	public static void main(String[] args) throws Exception 
+  	{
+  		DataOutputStream dos = new DataOutputStream(new FileOutputStream("d:/kk.txt"));
+  		dos.writeLong(12345);  //实际写入文件的是00 11 00 00 00 11 10 01
+  		dos.close();
+  		System.out.printf("%#X\n", 12345);
+  		
+  		PrintStream ps = new PrintStream(new FileOutputStream("d:/kk2.txt"), true);
+  		ps.println(12345);  //实际写入文件的是'1' '2' '3' '4' '5'
+  		ps.close();
+  	}
+  }
+  ```
+
+### 标准输入输出的重定向
+
+- ```java
+  import java.io.*;
+  
+  public class TestSys
+  {
+  	public static void main(String[] args) throws Exception
+  	{
+  		PrintStream ps = new PrintStream("d:/heihei.asd");
+  		System.setOut(ps);
+  		System.out.println("哈哈");
+  	}
+  }
+  ```
+
+- ```java
+  /*
+  	2009年3月30日9:57:47
+  	功能： 将键盘输入的数据输入A文件中，如果输入有误，
+  		   则把出错信息输出到B文件中
+  	
+  	e.printStackTrace()默认是把错误信息输出到System.err所关联的设备中（屏幕）
+  */
+  
+  import java.io.*;
+  import java.util.*;
+  
+  public class TestSetOutErr
+  {
+  	public static void main(String[] args) 
+  	{
+  		PrintStream psOut = null;
+  		PrintStream psError = null;
+  		Scanner sc = null;
+  		
+  		
+  		try
+  		{
+  			psOut = new PrintStream("d:/Out.txt");
+  			psError = new PrintStream("d:/error.txt");
+  			sc = new Scanner(System.in);
+  			int num;
+  			System.setOut(psOut);
+  			System.setErr(psError);
+  			
+  			while (true)
+  			{
+  				num = sc.nextInt();
+  				System.out.println(num);				
+  			}	
+  		}
+  		catch (Exception e)
+  		{
+  			System.err.println("出错的信息是:");  //不可以写成System.out.println("出错的信息是:");
+  			e.printStackTrace();  //e.printStackTrace(); 默认是输出到System.err所关联的设备中
+  		}			
+  	}
+  }
+  ```
+
+### 对象的序列化
+
+- Serializable接口、transient修饰符
+
+- ```java
+  import java.io.*;
+  
+  public class TestObjectIO
+  {
+  	public static void main(String[] args)
+  	{
+  		ObjectOutputStream oos = null;
+  		ObjectInputStream ois = null;
+  		Student ss = new Student("zhansan", 1000, 88.8f);  //注意88.8f不能改为88.8 
+  		Student ss2 = null;	
+  				
+  		try
+  		{
+  			FileOutputStream fos = new FileOutputStream("d:/share/java/ObjectOut.txt");
+  			oos = new ObjectOutputStream(fos);
+  			oos.writeObject(ss);
+  			
+  			ois = new ObjectInputStream(new FileInputStream("d:/share/java/ObjectOut.txt"));	
+  			ss2 = (Student)ois.readObject();  //(Student)不能省   ois.readObject();如果ois中的某个成员是transient,则该成员是不会被读取的，因为该成员不会被保存，何来读取之说？！
+  			
+  			System.out.println("ss2.sname = " + ss2.sname);
+  			System.out.println("ss2.sid = " + ss2.sid);
+  			System.out.println("ss2.sscore = " + ss2.sscore);
+  		}
+  		catch (FileNotFoundException e)
+  		{
+  			System.out.println("文件没有找到!");
+  			System.exit(-1);
+  		}
+  		catch (Exception e)
+  		{
+  			e.printStackTrace();
+  			System.exit(-1);
+  		}
+  		finally
+  		{
+  			try
+  			{
+  				oos.close();
+  				ois.close();
+  			}
+  			catch (Exception e)
+  			{
+  				e.printStackTrace();
+  				System.exit(-1);
+  			}
+  		}		
+  	}
+  }
+  
+  class Student implements Serializable  //如果将implements Serializable 注释掉，则程序编译时就会报错
+  {
+  	public String sname = null;
+  	transient public int sid = 0;
+  	public float sscore = 0; //transient修饰的成员不能被序列化，所谓不能被序列化就是指：“该成员调用ObjectOutputStream 的writeOnbject()时不会被保存，调用ObjectInputStream的readObject()方法时不会被读取”
+  	
+  	public Student(String name, int id, float score)
+  	{
+  		this.sname = name;
+  		this.sid = id;
+  		this.sscore =  score;
+  	}
+  }
+  ```
+
+  
