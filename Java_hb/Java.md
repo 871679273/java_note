@@ -1356,4 +1356,63 @@ public class TestPC
     }
     ```
 
-    
+- Set, HashSet, TreeSet, --- 要实现不重复，需要重写equals()和hashCode()
+- 需要重写equals(Object ob)。否则它判断的是地址是否相同（默认的equals方法比较的是地址），那么内容相同的可以重复存在set里
+- hashCode()表示返回这个对象在内存中的地址的16进制表示。
+
+- ```java
+  import java.util.*;
+  
+  class Student 
+  {
+  	private int id;
+  	private String name;
+  	
+  	public Student(int id, String name)
+  	{
+  		this.id = id;
+  		this.name = name;
+  	}
+  	
+  	@Override
+  	public String toString()
+  	{
+  		return id + "  " + name;  //1000张三   
+  		//System.out.println();
+  	}	
+  	
+  	public boolean equals(Object ob)
+  	{
+  		Student st = (Student)ob;
+  		return st.id==this.id && st.name==this.name;
+  	}
+  	
+  	public int hashCode()
+  	{
+  		return id * this.name.hashCode();
+  	}
+  }
+  
+  public class TestSet
+  {
+  	public static void main(String[] args)
+  	{
+  		Set S = new HashSet();  //TreeSet
+  		S.add(new Student(1000, "张三"));
+  		S.add(new Student(1003, "小娟"));
+  		S.add(new Student(1002, "王五"));
+  		S.add(new Student(1001, "李四"));
+  		S.add(new Student(1001, "李四"));
+  		S.add(new Student(1001, "李四"));
+  		S.add(new Student(1001, "李四"));
+  		S.add(new Student(1001, "李四"));
+  		S.add(new Student(1001, "李四"));
+  
+  
+  		
+  		System.out.println(S);  //[
+  	}
+  }
+  ```
+
+  
