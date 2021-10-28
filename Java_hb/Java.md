@@ -1293,7 +1293,7 @@ public class TestPC
 
 # 容器
 
-- 容器存的都是对象
+- 容器存的都是对象（基本数据会被自动装箱成对象）
 - ArrayList,LinkedList... list（列表）
 - 集set,列表list,映射map
 - ArrayList底层采用数组，LinkedList是双向链表。ArrayList存取速度快，插入删除慢，LinkedList存取速度慢，插入速度快。
@@ -1356,9 +1356,9 @@ public class TestPC
     }
     ```
 
-- Set, HashSet, TreeSet, --- 要实现不重复，需要重写equals()和hashCode()
+- Set, HashSet, TreeSet, --- HashSet的存储结构（哈希表），使得其要实现不重复，需要重写equals()和hashCode()
 - 需要重写equals(Object ob)。否则它判断的是地址是否相同（默认的equals方法比较的是地址），那么内容相同的可以重复存在set里
-- hashCode()表示返回这个对象在内存中的地址的16进制表示。
+- hashCode()默认表示返回这个对象在内存中的地址的16进制表示。
 
 - ```java
   import java.util.*;
@@ -1411,6 +1411,215 @@ public class TestPC
   
   		
   		System.out.println(S);  //[
+  	}
+  }
+  ```
+
+- hashcode的重写方法
+
+  ```java
+  /*
+  须知：Interger、String的hashCode方法已经被sun公司重写，只要值相同，则哈希code是相同的
+  */
+  class B
+  {
+  	private int i;
+  	
+  	public B(int i)
+  	{
+  		this.i = i;
+  	}
+  	
+  	public boolean equals(Object ob)
+  	{
+  		B bb = (B)ob;
+  		return this.i == bb.i;
+  	}
+  	
+  	public int hashCode() //Integer(1)
+  	{
+  		return new Integer(i).hashCode(); 
+  	}
+  }
+  
+  class Student
+  {
+  	private int id;
+  	private String name;
+  	
+  	public Student(int id, String name)
+  	{
+  		this.id = id;
+  		this.name = name;
+  	}
+  	
+  	public int hashCode()
+  	{
+  		//return new String(name+id).hashCode();
+  		return id * name.hashCode();
+  	}
+  }
+  
+  public class TestHash
+  {
+  	public static void main(String[] args)
+  	{
+  		B bb1 = new B(1);
+  		B bb2 = new B(10);
+  		System.out.println(bb1.equals(bb2));  //
+  		System.out.println(bb1.hashCode() == bb2.hashCode()); // 
+  	
+  		Student st1 = new Student(1, "1111");
+  		Student st2 = new Student(1, "1111");
+  		System.out.println(st1.hashCode() == st2.hashCode()); //
+  		
+  	}
+  }
+  ```
+
+- 如何重写equals、hashCode看ppt
+
+- TreeSet是有序集合，因此需要实现Comparable接口。TreeSet中元素将按照升序排列，缺省是按照自然顺序排列。（所有可以进行排序的类都应该实现Comparable接口）
+
+- HashSet性能通常由于TreeSet，通常应用HashSet,需要排序时才使用TreeSet
+
+- Map——哈希冲突——哈希因子
+
+- 哈希表的知识
+
+- Map也要重写hashCode和equals
+
+  ```java
+  import java.util.*;
+  
+  class Student
+  {
+  	private int id;
+  	private String name;
+  	private int age;
+  	
+  	public Student()
+  	{
+  	}
+  	
+  	public Student(int id, String name, int age)
+  	{
+  		this.id = id;
+  		this.name = name;
+  		this.age = age;
+  	}
+  	
+  	public int hashCode()
+  	{
+  		return this.name.hashCode()*id*age;
+  	}	
+  	
+  	public boolean equals(Object o)
+  	{
+  		Student s = (Student)o;
+  		return this.name.equals(s.name) && this.id==s.id && this.age==s.age;	
+  	}	
+  
+  	public String toString()
+  	{
+  		return id + "  " + name + "  " + age;
+  	}
+  }
+  
+  public class TestHashMap_2
+  {
+  	public static void main(String[] args){
+  		HashMap hm = new HashMap();
+  		hm.put(1001, new Student(1001, "zhangsan", 20));  //自动封装
+  		hm.put(1003, new Student(1003, "lisi", 30)); //自动封装
+  		hm.put(new Integer(1004), new Student(1004, "wangwu", 10));
+  		hm.put(1002, new Student(1002, "baichi", 20)); //自动封装
+  		
+  		//遍历所有的元素
+  		System.out.println("hm容器中所有的元素是:");
+  		Set s = hm.keySet();  //获取到当前容器键的集合，实际就是Integer对象的集合
+  		Iterator it = s.iterator();
+  		while (it.hasNext()){
+  			//int Key = (Integer)it.next();   // (Integer) 不能省， 利用了自动拆分技术      
+  			Integer kk = (Integer)it.next();
+  			System.out.println(hm.get(kk));
+  		}
+  		
+  		System.out.println("直接查找某一元素");
+  		System.out.println( hm.get(1003) );	
+  		System.out.println( hm.get(1005) );	  //如果找不到 则直接返回null，而不是抛出异常 			
+  	}
+  }
+  ```
+
+  
+
+<br>
+
+<br>
+
+## Iterator 接口
+
+- array，linked，tree，哈希表等不同数据结构的存储，其遍历的方式不同。用Iterator实现统一的按钮方法。
+
+- iterator是collection类自带的方法，Iterator是一个接口，使用方法：
+
+  - ```java
+    //下面代码放在启动类里，和 mian方法并列
+    public static void showCollection(Collection c){
+        Iterator it = c.iterator(); //it可以理解为一个指针
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
+    }
+    ```
+
+- ```java
+  import java.util.*;
+  
+  public class TestIterator_1
+  {
+  	//可以遍历所有Collection接口的实现类
+  	public static void showCollection(Collection c)
+  	{
+  		Iterator it = c.iterator();
+  		while (it.hasNext())
+  		{
+  			System.out.println(it.next());
+  		}
+  	}
+  
+  	public static void main(String[] args)
+  	{
+  		ArrayList al = new ArrayList();
+  		al.add("one");
+  		al.add(22);
+  		al.add(new Point(1,1));
+  		System.out.println("a1 容器的内容是:");
+  		showCollection(al);
+  		
+  		HashSet hs = new HashSet();
+  		hs.add("one");
+  		hs.add(22);
+  		hs.add(new Point(1,1));
+  		System.out.println("hs容器的内容是:");
+  		showCollection(hs);
+  	}
+  }
+  
+  class Point
+  {
+  	private int i, j;
+  	
+  	public Point(int i, int j)
+  	{
+  		this.i = i;
+  		this.j = j;
+  	}
+  	
+  	public String toString()
+  	{
+  		return "[" + i + ", " + j + "]";
   	}
   }
   ```
