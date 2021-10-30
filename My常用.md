@@ -1,3 +1,47 @@
+### 快捷键和代码模板
+
+【1】创建内容：alt+insert
+
+【2】main方法：psvm
+
+【3】输出语句：sout
+
+【4】复制行：ctrl+d
+
+【5】删除行：ctrl+y
+
+【6】代码向上/下移动：Ctrl + Shift + Up / Down
+
+【7】搜索类：  ctrl+n
+
+【8】生成代码  ：alt + Insert（如构造函数等，getter,setter,hashCode,equals,toString）
+
+【9】百能快捷键 : alt + Enter （导包，生成变量等）
+
+【10】单行注释或多行注释 ：  Ctrl + / 或 Ctrl + Shift + /
+
+【11】重命名 shift+f6
+
+【12】for循环  直接 ：fori   回车即可
+
+【13】代码块包围：try-catch,if,while等  ctrl+alt+t
+
+【16】代码一层一层调用的快捷键：
+点进源码：ctrl+鼠标悬浮在代码上+点进去即可：
+【19】撤回：ctrl+z
+
+【20】REDO操作：
+如果跟搜狗输入法的快捷键冲突，可以选择将搜狗的快捷键取消。
+
+- file-settings-Editor-General-Postfix Completion 和 Editor-Live Templates
+- "hhh".sout、b.sout(soutp:打印方法的形参soutm:打印方法的名字soutv:打印变量)
+- 普通for循环：   fori（正向）   或者   .fori （正向）   . forr(逆向)。 增强for循环：  iter  或者  .for（可以用于数组的遍历，集合的遍历）
+- ifn 或者  .null ：判断是否为null  （if null）
+  inn 或者 .nn ：判断不等于null   (if not null)
+-  属性修饰符：
+  prsf : private static final
+  psf  :public static final
+
 ### 随机数
 
 ```java
