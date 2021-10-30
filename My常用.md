@@ -40,7 +40,7 @@
   inn 或者 .nn ：判断不等于null   (if not null)
 -  属性修饰符：
   prsf : private static final
-  psf  :public static final
+  psf  :public static final 
 
 ### 随机数
 
