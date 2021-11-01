@@ -80,7 +80,9 @@ switch (choice){
                     }
 ```
 
-### 增强for循环
+### 循环
+
+- 增强for循环
 
 ```java
 for(int num:balls){
@@ -88,6 +90,8 @@ for(int num:balls){
 }
 //balls可以是数组
 ```
+
+- 
 
 ### equals
 
@@ -131,5 +135,30 @@ Arrays.copeOfRange(arr,rangeL,rangeR);
 arr.length //属性
 //获取string长度
 str.length() //方法
+```
+
+### 类型转换
+
+```java
+//String to int
+int a = Interger.parseInt("15");
+//String to double
+double d1 = Double.parseDouble("18.8");
+//char to string
+char c = '强';
+String str = c + "";
+```
+
+### Math
+
+```java
+//向上取整用
+Math.ceil(double a)
+//向下取整用
+Math.floor(double a)
+//次方
+Math.pow(a,b);
+//平方根，立方根
+Math.sqrt();Math.cbrt();
 ```
 
