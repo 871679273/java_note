@@ -1,5 +1,10 @@
 ### 快捷键和代码模板
 
+- 格式化代码：ctrl+alt +L
+- 查看类的层级关系：ctrl+h
+- 定位方法位置：ctrl+b
+- 自动分配变量名：输入new 类().var 
+
 【1】创建内容：alt+insert
 
 【2】main方法：psvm
