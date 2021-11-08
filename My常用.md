@@ -98,10 +98,15 @@ for(int num:balls){
 
 - 
 
-### equals
+### 相等比较
 
 ```java
+//字符串
 "猫".equals(petName) //与petName.equals("猫")相比，可以防止空指针异常。petName可能是空的。
+"hello".equals("hi")
+
+//int,char
+用 ==
 ```
 
 ### 转义符
