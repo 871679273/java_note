@@ -91,6 +91,8 @@
 
 - 运行类型是可以变化的
 
+- 运行类型可以用obj.getClass()获取
+
 - ```java
   Animal animal = new Dog();
   animal = new Cat();//运行类型变了，编译类型没变，仍是Animal
