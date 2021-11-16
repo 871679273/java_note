@@ -413,6 +413,88 @@
 
 ## 第三部分：高级部分
 
+### 0.其他
+
+#### 枚举类
+
+##### 定义
+
+- 枚举对应英文（enum）
+- 枚举是一组常量的集合
+- 枚举属于一种特殊的类，里面只包含一组优先的特定的对象
+
+##### 实现
+
+1. 自定义类，实现枚举
+
+   1. 构造器私有化
+   2. 本类内部创建一组对象
+   3. 对外暴露对象(public static final)
+   4. 可以提供get方法，不要提供set方法
+
+   ```java
+   //步骤
+   //1.构造器私有化
+   //2.去掉setter方法，因为枚举对象值通常为只读
+   //3.对枚举对象/属性使用final+static共同修饰，实现底层优化
+   //4.枚举对象名通常全部大写
+   //5.枚举对象根据需要，也可以有多个属性
+   
+   class Season{
+       private String name;
+       private String description;
+       
+       private Season(String name,String description){
+           this.name = name;
+           this.description = description;
+       }
+       
+       public final static Season SPRING = new Season("春天","温暖");
+       public final static Season SUMMER = new Season("春天","温暖");
+       public final static Season AUTUMN = new Season("春天","温暖");
+       public final static Season WINTER = new Season("春天","温暖");
+       
+       //下面是getters，没有setters
+       //可以改写tostring来打印
+   }
+   ```
+
+2. 使用enum关键字实现
+
+   ```java
+   //如果使用了enum来实现枚举类
+   //1.使用关键字enum替代class
+   //2.public static final Season SPRING = new Season("春天","温暖"); 直接使用
+   //    SPRING("春天","温暖");代替。
+   //    语法：常量名(实参列表)
+   //3.如果有多个常量（对象），使用逗号间隔
+   //4.如果使用enum来实现，要求定义常量对象，写在最前面
+   //5.如果使用了无参构造器，则可以省略()如：enum Gender{BOY,GIRL;}
+   //6.enum类的toString返回的是name
+   enum Season{
+       SPRING("春天","温暖"), SUMMER("春天","温暖"), AUTUMN("春天","温暖"), 
+       WINTER("春天","温暖");
+       
+       private String name;
+       private String description;
+       
+       private Season(String name,String description){
+           this.name = name;
+           this.description = description;
+       }
+       
+       //下面是getters，没有setters
+   }
+   ```
+
+##### enum类的常用方法
+
+- name() 返回枚举对象的名字（建议用toString）
+- ordinal() 编号，次序，零开始编号
+- 
+
+
+
 ### 1.异常
 
 #### 定义
