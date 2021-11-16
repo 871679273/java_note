@@ -422,10 +422,11 @@
 - 枚举对应英文（enum）
 - 枚举是一组常量的集合
 - 枚举属于一种特殊的类，里面只包含一组优先的特定的对象
+- 枚举对象相当于枚举类的成员，用类名.对象名调用某个对象
 
 ##### 实现
 
-1. 自定义类，实现枚举
+1. **自定义类，实现枚举**
 
    1. 构造器私有化
    2. 本类内部创建一组对象
@@ -459,7 +460,7 @@
    }
    ```
 
-2. 使用enum关键字实现
+2. **使用enum关键字实现**
 
    ```java
    //如果使用了enum来实现枚举类
@@ -473,7 +474,7 @@
    //6.enum类的toString返回的是name
    enum Season{
        SPRING("春天","温暖"), SUMMER("春天","温暖"), AUTUMN("春天","温暖"), 
-       WINTER("春天","温暖");
+       WINTER;
        
        private String name;
        private String description;
@@ -489,11 +490,30 @@
 
 ##### enum类的常用方法
 
-- name() 返回枚举对象的名字（建议用toString）
-- ordinal() 编号，次序，零开始编号
-- 
+1. name() 返回枚举对象的名字（建议用toString）
+2. ordinal() 返回对象编号，次序，零开始编号
+3. values() 返回对象数组
+4. valueOf(String str) 给对象名，返回对象
+5. Season.AUTUMN.compareTo(Season.SUMMER) 比较的是编号（结果是编号相减）
 
+##### 使用细节
 
+1. 使用enum关键字后，不能再继承其他类。因为enum已经是继承Enum类，java只能单继承
+2. 使用enum关键字后，可以实现接口。
+
+<br>
+
+#### 注解
+
+- Annotation、Metadata
+- 三个基本Annotation:
+  - @Override
+  - @Deprecated:用于表示某个程序元素（类，方法等）已过时。
+  - @SuppressWarnings：抑制编译器警告
+
+<br>
+
+<br>
 
 ### 1.异常
 
