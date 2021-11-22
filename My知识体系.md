@@ -354,7 +354,7 @@
 - 基于类的匿名内部类
   - 同理。相当于extends了父类。
   - 基于抽象类的匿名内部类则必须重写方法。
-- 典型用法：匿名内部类当做实参直接传递。
+- 典型用法：匿名内部类当做实参直接传递。(Chapter10 Homework4)
 
 ##### 成员内部类
 
@@ -520,22 +520,49 @@
 #### 定义
 
 - 运行时的错误
+- 处理异常，使程序能继续运行
 
 #### 分类
 
-- 无法处理的错误
+- Throwable
+  - Error
+    - StackOverflowError
+    - OutOfMemoryError
+  - Exception
+    - RuntimeException (NullPointerException、ArithmeticException...)
+    - 编译异常
+- 无法处理的错误error
 - 可以处理的异常
   - 必须处理的异常
     - 是Exception子类但不是RuntimeException的子类
   - 可处理可不处理的异常
     - 是RuntimeException的子类
-- 注意问题：
-  - finally{....}一定会执行
-  - 先捕获子类异常，再捕获父类异常，顺序不可颠倒
-  - 重写方法抛出的异常的范围不能大于倍重写方法抛出的异常的范围
-  - 假设f方法抛出了A异常，则f方法有两种方式处理A异常：
-    1. throws A
-    2. try{ ... } catch( ){ ... }
+
+#### 常见异常
+
+- 常见运行时异常
+  - NullPointerException空指针异常
+    - 当程序试图在需要对象的地方使用null时，抛出该异常
+  - 
+
+#### 注意问题：
+
+- finally{....}一定会执行
+- 先捕获子类异常，再捕获父类异常，顺序不可颠倒
+- 重写方法抛出的异常的范围不能大于倍重写方法抛出的异常的范围
+- 假设f方法抛出了A异常，则f方法有两种方式处理A异常：
+  1. throws A
+  2. try{ ... } catch( ){ ... }
+
+#### 示例
+
+```java
+try{
+    int x = 10 / 0;
+}catch (Exception e){
+    System.out.println("异常信息"+e.getMessage());
+}
+```
 
 <br>
 
