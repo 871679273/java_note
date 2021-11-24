@@ -521,6 +521,7 @@
 
 - 运行时的错误
 - 处理异常，使程序能继续运行
+- 快捷键 Ctrl + Alt + T
 
 #### 分类
 
@@ -543,25 +544,72 @@
 - 常见运行时异常
   - NullPointerException空指针异常
     - 当程序试图在需要对象的地方使用null时，抛出该异常
-  - 
+  - ArithmeticException数学运算异常
+  - ArrayIndexOutOfBoundsException 数组下标越界异常
+  - ClassCastException  类型转换异常
+  - NumberFormatException 数字格式异常
 
 #### 注意问题：
 
 - finally{....}一定会执行
+
 - 先捕获子类异常，再捕获父类异常，顺序不可颠倒
-- 重写方法抛出的异常的范围不能大于倍重写方法抛出的异常的范围
+
+- 重写方法抛出的异常的范围不能大于被重写方法抛出的异常的范围
+
 - 假设f方法抛出了A异常，则f方法有两种方式处理A异常：
-  1. throws A
+  1. throws A：
+
+     将发生的异常抛出，交给调用者（方法）来处理，（f1-->main-->jvm）最顶级的处理者就是JVM，jvm处理方式：1.输出异常信息2.退出程序
+
   2. try{ ... } catch( ){ ... }
+
+- 可以使用多个catch分别捕获多个异常，子类异常要在父类异常之前
+
+- 可以只有try-finally。
+
+- 对于编译异常，程序中必须处理，比如try-catch或throws
+
+- 对于运行时异常，程序中如果没有处理，默认就是throws的方式处理
+
+- 
 
 #### 示例
 
 ```java
+// 1
 try{
     int x = 10 / 0;
 }catch (Exception e){
     System.out.println("异常信息"+e.getMessage());
 }
+```
+
+```java
+//输入一个整数，如果不是整数，提示一下，继续输入，直到为整数为止。
+public class Exercise01 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int num = 0;
+        String str = "";
+        
+        while (true){
+            System.out.println("input an int number");
+            str = scanner.nextLine();
+            try {
+                num = Integer.parseInt(str);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("输入错误");
+            }
+        }
+        
+    }
+}
+```
+
+```java
+//自定义异常
 ```
 
 <br>
